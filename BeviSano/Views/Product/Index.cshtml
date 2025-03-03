@@ -1,5 +1,27 @@
-﻿@{
+﻿@model StoreList
+@{
     ViewData["Title"] = "BeviSano";
 }
 
-<h1>Product Index</h1>
+<h1>Product</h1>
+<div class="container">
+    <div class="row">
+        
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                <img src=@item.Cover_Product class="card-img-top" alt="ImageProduct" style="height:350px; width:300px">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name_Product</h5>
+                    <p class="card-text">@item.Description_Product</p>
+                    <p class="card-text">@item.Price_Product.ToString("0.00") €</p>
+                    <a asp-controller="Product" asp-action="Cart" asp-route-id=@item.Id_Product class="btn btn-primary">+ Carrello</a>
+                    <a asp-controller = "Product" asp-action="Detail" asp-route-id=@item.Id_Product class="btn btn-primary">Visualizza di più</a>
+                </div>
+            </div>
+        </div>
+        }
+       
+    </div>
+</div>

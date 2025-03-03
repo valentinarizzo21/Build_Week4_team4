@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BeviSano.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace BeviSano.Controllers
 {
@@ -16,9 +18,75 @@ namespace BeviSano.Controllers
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Products = new StoreList();
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Products";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var product = new Product
+                            {
+                                Id_Product = reader.GetGuid(0),
+                                Name_Product = reader.GetString(1),
+                                Price_Product = reader.GetDecimal(2),
+                                Description_Product = reader.GetString(3),
+                                Stock_Product = reader.GetInt32(4),
+                                Seller_Product = reader.GetString(5),
+                                Sale_Product = reader.GetDecimal(6),
+                                Arrival_Date_Product = reader.GetInt32(7),
+                                Cover_Product = reader.GetString(8),
+                                Id_Category = reader.GetInt32(9),
+                            }
+                        ;
+                            Products.Products.Add(product);
+                        }
+                    }
+                }
+            }
+
+
+            return View(Products);
+        }
+
+        [HttpGet("/Detail/{id:guid}")]
+        public async Task<IActionResult> Detail(Guid id)
+        {
+            SingleProduct product = new SingleProduct();
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string query = "SELECT * FROM Products WHERE Id_Product = @id";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    
+                    command.Parameters.AddWithValue("@id", id); 
+                    await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            product.Id_Product = id;
+                            product.Name_Product = reader.GetString(1);
+                            product.Price_Product = reader.GetDecimal(2);
+                            product.Description_Product = reader.GetString(3);
+                            product.Stock_Product = reader.GetInt32(4);
+                            product.Seller_Product = reader.GetString(5);
+                            product.Sale_Product = reader.GetDecimal(6);
+                            product.Arrival_Date_Product = reader.GetInt32(7);
+                            product.Cover_Product = reader.GetString(8);
+                            product.Id_Category = reader.GetInt32(9);
+              
+                        }
+                    }
+                }
+            }
+            return View(product);
         }
     }
 }

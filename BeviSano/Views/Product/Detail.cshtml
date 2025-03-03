@@ -1,0 +1,37 @@
+﻿@model SingleProduct
+@{
+    ViewData["Title"] = "BeviSano";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center flex-column">
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg bg-transparent">
+                <img src="@Model.Cover_Product" class="img-fluid rounded shadow-lg product-detail-image" alt="@Model.Name_Product">
+            </div>
+        </div>
+        <div>
+            <div class="product-info p-4 rounded shadow text-white bg-dark bg-opacity-50 mt-5 d-flex flex-column">
+
+                <h2 class=" h1 fw-bold overflow-hidden" style="height: 150px
+">
+                    <span class="h4 opacity-75">Hai selezionato: <br /> </span>@Model.Name_Product
+                </h2>
+
+                <p class="lead price-box"><strong>@Model.Price_Product.ToString("0.00") €</strong></p>
+                <p class="text-light">@Model.Description_Product</p>
+
+                <h4 class="mt-4 text-white">Altre immagini</h4>
+                <div class="d-flex flex-wrap">
+                   @*  @foreach (var img in Model.ImmaginiAggiuntive)
+                    {} *@
+                        <img src="@Model.Cover_Product" class="img-thumbnail mx-2" style="width: 200px; height: 200px; border-radius: 8px; object-fit: cover;" alt="Immagine aggiuntiva">
+                    
+                </div>
+
+                <a asp-controller="Product" asp-action="Index" class="btn btn-light mt-4 p-3 w-25 align-self-end">Torna alla Vetrina</a>
+            </div>
+        </div>
+    </div>
+</div>
