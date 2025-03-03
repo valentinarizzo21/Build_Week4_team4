@@ -16,7 +16,9 @@
                     <h5 class="card-title">@item.Name_Product</h5>
                     <p class="card-text">@item.Description_Product</p>
                     <p class="card-text">@item.Price_Product.ToString("0.00") €</p>
-                    <a href="#" class="btn btn-primary">Visualizza di più</a>
+                    <a asp-controller="Product" asp-action="Cart" asp-route-id=@item.Id_Product class="btn btn-primary">+ Carrello</a>
+                    <a asp-controller = "Product" asp-action="Detail" asp-route-id=@item.Id_Product class="btn btn-primary">Visualizza di più</a>
+                        
                 </div>
             </div>
         </div>
