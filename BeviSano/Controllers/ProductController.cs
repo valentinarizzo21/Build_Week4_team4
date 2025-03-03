@@ -39,7 +39,7 @@ namespace BeviSano.Controllers
                                 Stock_Product = reader.GetInt32(4),
                                 Seller_Product = reader.GetString(5),
                                 Sale_Product = reader.GetDecimal(6),
-                                Arrival_Date_Product = reader.GetDateTime(7),
+                                Arrival_Date_Product = reader.GetInt32(7),
                                 Cover_Product = reader.GetString(8),
                                 Id_Category = reader.GetInt32(9),
                             }
