@@ -53,6 +53,86 @@ namespace BeviSano.Controllers
             return View(productsList);
         }
 
+        [HttpPost("/admin/add/save")]
+        public async Task<IActionResult> AddProduct(AddProduct newProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var myProduct = new Product();
+
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                var query =
+                    "INSERT INTO Products (Id_Product, Name_Product, Price_Product, Description_Product, Stock_Product, Seller_Product, Sale_Product, Arrival_Date_Product, Cover_Product, Id_Category) VALUES (@newId, @name, @price, @description, @stock, @seller, @sale, @date, @cover, @idCategory);";
+
+                if (newProduct.Image_One != null)
+                {
+                    query =
+                        query
+                        + " INSERT INTO Images (Id_Image, Id_Product, Url_Image) VALUES (@imageOneId, @productId1, @imageOneUrl);";
+                }
+
+                if (newProduct.Image_Two != null)
+                {
+                    query =
+                        query
+                        + " INSERT INTO Images (Id_Image, Id_Product, Url_Image) VALUES (@imageTwoId, @productId2, @imageTwoUrl);";
+                }
+
+                if (newProduct.Image_Three != null)
+                {
+                    query =
+                        query
+                        + " INSERT INTO Images (Id_Image, Id_Product, Url_Image) VALUES (@imageThreeId, @productId3, @imageThreeUrl);";
+                }
+
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    var newId = Guid.NewGuid();
+
+                    command.Parameters.AddWithValue("@newId", newId);
+                    command.Parameters.AddWithValue("@name", newProduct.Name_Product);
+                    command.Parameters.AddWithValue("@price", newProduct.Price_Product);
+                    command.Parameters.AddWithValue("@description", newProduct.Description_Product);
+                    command.Parameters.AddWithValue("@stock", newProduct.Stock_Product);
+                    command.Parameters.AddWithValue("@seller", newProduct.Seller_Product);
+                    command.Parameters.AddWithValue("@sale", newProduct.Sale_Product);
+                    command.Parameters.AddWithValue("@date", newProduct.Arrival_Date_Product);
+                    command.Parameters.AddWithValue("@cover", newProduct.Cover_Product);
+                    command.Parameters.AddWithValue("@idCategory", newProduct.Id_Category);
+
+                    if (newProduct.Image_One != null)
+                    {
+                        command.Parameters.AddWithValue("@imageOneId", Guid.NewGuid());
+                        command.Parameters.AddWithValue("@productId1", newId);
+                        command.Parameters.AddWithValue("@imageOneUrl", newProduct.Image_One);
+                    }
+
+                    if (newProduct.Image_Two != null)
+                    {
+                        command.Parameters.AddWithValue("@imageTwoId", Guid.NewGuid());
+                        command.Parameters.AddWithValue("@productId2", newId);
+                        command.Parameters.AddWithValue("@imageTwoUrl", newProduct.Image_Two);
+                    }
+
+                    if (newProduct.Image_Three != null)
+                    {
+                        command.Parameters.AddWithValue("@imageThreeId", Guid.NewGuid());
+                        command.Parameters.AddWithValue("@productId3", newId);
+                        command.Parameters.AddWithValue("@imageThreeUrl", newProduct.Image_Three);
+                    }
+
+                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Add()
         {
             return View();
@@ -101,7 +181,6 @@ namespace BeviSano.Controllers
         public async Task<IActionResult> SaveEdit(Guid id, EditProduct editedProduct)
         {
             editedProduct.Id_Product = id;
-            editedProduct.Id_Category = 2;
 
             if (!ModelState.IsValid)
             {

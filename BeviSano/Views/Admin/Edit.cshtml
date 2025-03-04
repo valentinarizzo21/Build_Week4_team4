@@ -1,7 +1,9 @@
-﻿@model EditProduct;
+﻿@using BeviSano.Controllers
+@model EditProduct;
 
 @{
     ViewData["Title"] = "Modifica prodotto";
+    var categories = HomeController.categories;
 }
 
 
@@ -41,12 +43,11 @@
                     <span class="text-danger" asp-validation-for="Cover_Product"></span>
                 </div>
 
-
+                @* TODO: modificare le foto opzionali *@
                 @* <div class="form-group mb-3">
                     <label for="AddImg1" class="form-label">Immagine aggiuntiva 1</label>
                     <input type="url" class="form-control form-control-lg" id="AddImg1" name="AddImg1" value="@Model.AddImg1" />
                 </div>
-
 
                 <div class="form-group mb-4">
                     <label for="AddImg2" class="form-label">Immagine aggiuntiva 2</label>
@@ -83,10 +84,16 @@
                 </div>
 
                 @* Categoria *@
-                @* <div class="form-group mb-3">
-                    <label for="deliveryTime" class="form-label" asp-for="Arrival_Date_Product"></label>
-                    <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
-                </div> *@
+                <div class="form-group mb-3">
+                    <label for="deliveryTime" class="form-label" asp-for="Id_Category"></label>
+                    <select class="form-select" asp-for="Id_Category">
+                        <option value="-1">-- seleziona una categoria --</option>
+                        @foreach (var category in categories.Categories)
+                        {
+                            <option value=@category.Id_Category>@category.Title</option>
+                        }
+                    </select>
+                </div>
 
 
 

@@ -32,7 +32,7 @@
                     <td>@product.Price_Product.ToString("0.00")€</td>
                     <td>@product.Stock_Product</td>
                     <td>@product.Seller_Product</td>
-                    <td>@product.Sale_Product</td>
+                    <td>@product.Sale_Product.ToString("0")</td>
                     <td>
                         <a class="btn btn-warning" asp-controller="Admin" asp-action="Edit" asp-route-id=@product.Id_Product>Edit</a>
                         <a class="btn btn-danger" asp-controller="Admin" asp-action="Delete" asp-route-id=@product.Id_Product>Delete</a>

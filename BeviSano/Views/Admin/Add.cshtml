@@ -1,8 +1,116 @@
-﻿@model AddProduct;
+﻿@using BeviSano.Controllers
+@model AddProduct
 
 @{
     ViewData["Title"] = "Aggiungi prodotto";
+    var categories = HomeController.categories;
 }
 
 
 <h4 class="text-center mb-4 text-primary">Aggiungi prodotto</h4>
+
+<div class="container">
+    <form method="post" asp-controller="Admin" asp-action="AddProduct">
+        <div class="card shadow-sm rounded-3 p-4">
+            <div class="card-body">
+
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label" asp-for="Name_Product"></label>
+                    <input type="text" class="form-control form-control-lg" id="name" asp-for="Name_Product" required />
+                    <span class="text-danger" asp-validation-for="Name_Product"></span>
+                </div>
+
+                @if (true) { }
+
+                <div class="form-group mb-3">
+                    <label for="price" class="form-label" asp-for="Price_Product"></label>
+                    <input type="number" step="0.01" class="form-control form-control-lg" id="price" asp-for="Price_Product" required />
+                    <span class="text-danger" asp-validation-for="Price_Product"></span>
+                </div>
+
+
+                <div class="form-group mb-3">
+                    <label for="description" class="form-label" asp-for="Description_Product"></label>
+                    <textarea class="form-control form-control-lg" id="description" rows="4" required" asp-for="Description_Product"></textarea>
+                    <span class="text-danger" asp-validation-for="Description_Product"></span>
+                </div>
+
+
+                <div class="form-group mb-3">
+                    <label for="coverImage" class="form-label" asp-for="Cover_Product"></label>
+                    <input type="text" class="form-control form-control-lg" id="coverImage" asp-for="Cover_Product" required />
+                    <span class="text-danger" asp-validation-for="Cover_Product"></span>
+                </div>
+
+                @* Immagini aggiuntive *@
+
+                <div class="form-group mb-3">
+                    <label for="imageOne" class="form-label" asp-for="Image_One"></label>
+                    <input type="text" class="form-control form-control-lg" id="imageOne" asp-for="Image_One" />
+                    <span class="text-danger" asp-validation-for="Image_One"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="imageTwo" class="form-label" asp-for="Image_Two"></label>
+                    <input type="text" class="form-control form-control-lg" id="imageTwo" asp-for="Image_Two" />
+                    <span class="text-danger" asp-validation-for="Image_Two"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="ImaheThree" class="form-label" asp-for="Image_Three"></label>
+                    <input type="text" class="form-control form-control-lg" id="ImaheThree" asp-for="Image_Three" />
+                    <span class="text-danger" asp-validation-for="Image_Three"></span>
+                </div>
+                @* ------- *@
+
+                <div class="form-group mb-3">
+                    <label for="stock" class="form-label" asp-for="Stock_Product"></label>
+                    <input type="number" step="1" min="0" class="form-control form-control-lg" id="stock" asp-for="Stock_Product" required />
+                    <span class="text-danger" asp-validation-for="Stock_Product"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="seller" class="form-label" asp-for="Seller_Product"></label>
+                    <input type="text" class="form-control form-control-lg" id="seller" asp-for="Seller_Product" required />
+                    <span class="text-danger" asp-validation-for="Seller_Product"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="sale" class="form-label" asp-for="Sale_Product"></label>
+                    <input type="number" min="0" max="99" step="1" class="form-control form-control-lg" id="sale" asp-for="Sale_Product" required />
+                    <span class="text-danger" asp-validation-for="Sale_Product"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="deliveryTime" class="form-label" asp-for="Arrival_Date_Product"></label>
+                    <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
+                    <span class="text-danger" asp-validation-for="Arrival_Date_Product"></span>
+                </div>
+
+                @* Categoria *@
+                <div class="form-group mb-3">
+                    <label for="deliveryTime" class="form-label" asp-for="Id_Category"></label>
+                    <select class="form-select" asp-for="Id_Category">
+                        <option value="-1">-- seleziona una categoria --</option>
+                        @foreach (var category in categories.Categories)
+                        {
+                            <option value=@category.Id_Category>@category.Title</option>
+                        }
+                    </select>
+                </div>
+
+
+
+
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success btn-lg w-48">Salva Modifiche</button>
+                    <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary btn-lg w-48">Annulla</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
