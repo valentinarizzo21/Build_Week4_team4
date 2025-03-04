@@ -1,15 +1,20 @@
-﻿@model LoginViewModel
+﻿@model RegisterViewModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Registrati";
 }
 
-
 <div>
-    <form method="post" asp-controller="Home" asp-action="Login">
+    <form method="post" asp-controller="Home" asp-action="AddAccount">
         <div>
             <label for="firstName" asp-for="Name" class="form-label"></label>
             <input id="firstName" asp-for="Name" class="form-control" />
             <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div>
+            <label for="firstName" asp-for="Email" class="form-label"></label>
+            <input id="firstName" asp-for="Email" class="form-control" />
+            <span class="text-danger" asp-validation-for="Email"></span>
         </div>
 
         <div>
@@ -18,8 +23,7 @@
             <span class="text-danger" asp-validation-for="Password"></span>
         </div>
 
-        <button class="btn btn-success" type="submit">Accedi</button>
-        <a class="btn btn-danger" asp-controller="Home" asp-action="Register">Registrati</a>
+        <button class="btn btn-success" type="submit">Registrati</button>
+        <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Accedi</a>
     </form>
-
 </div>

@@ -81,7 +81,6 @@ namespace BeviSano.Controllers
                             product.Arrival_Date_Product = reader.GetInt32(7);
                             product.Cover_Product = reader.GetString(8);
                             product.Id_Category = reader.GetInt32(9);
-              
                         }
                     }
                 }
