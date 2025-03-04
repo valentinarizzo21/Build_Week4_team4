@@ -1,0 +1,46 @@
+﻿@model ProductsListAdminView;
+
+@{
+    ViewData["Title"] = "Pagina Admin";
+}
+
+<div>
+    <div class="d-flex justify-content-end my-3">
+        <a class="btn btn-success" asp-controller="Admin" asp-action="Add">Aggiungi prodotto</a>
+    </div>
+
+    <table class="table table-striped table-hover border">
+        <thead>
+            <tr class="border">
+                <th>Prodotto</th>
+                <th>Nome</th>
+                <th>Prezzo</th>
+                <th>Quantità disponibili</th>
+                <th>Produttore</th>
+                <th>Sconto applicato</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in Model.Products)
+            {
+                <tr class="border">
+                    <td>
+                        <img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:100px" />
+                    </td>
+                    <td>@product.Name_Product</td>
+                    <td>@product.Price_Product.ToString("0.00")€</td>
+                    <td>@product.Stock_Product</td>
+                    <td>@product.Seller_Product</td>
+                    <td>@product.Sale_Product</td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="Admin" asp-action="Edit" asp-route-id=@product.Id_Product>Edit</a>
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="Delete" asp-route-id=@product.Id_Product>Delete</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
