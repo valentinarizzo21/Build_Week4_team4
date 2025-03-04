@@ -67,3 +67,19 @@ hr:not([size]) {
 .btn-check:focus + .btn, .btn:focus {
     box-shadow: none !important;
 }
+
+.btn_home {
+    width: 200px !important;
+}
+
+.bg_form_complete, .form-group input, .form-group textarea {
+    background: #f2f1e7 !important;
+}
+
+.form-control:focus {
+    background: #f2f1e7 !important;
+    border-color: black !important;
+    border: 1px solid #ced4da !important;
+    box-shadow: none !important;
+}
+
