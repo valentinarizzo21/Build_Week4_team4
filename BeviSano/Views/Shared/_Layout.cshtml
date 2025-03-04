@@ -5,27 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-md navbar-toggleable-sm  border-bottom box-shadow mb-3 p-0" style="background-color:#915b4a;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BeviSano</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand p-0 m-0" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/lib/img/bevi_sano_footer.png" alt="logo_footer" class="img-fluid m-0 p-0 d-block" style="max-width: 110px; max-height: 110px;" /></a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon "></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 text-start">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white h6 fw-normal px-3 text-decoration-none hover-opacity" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white h6 fw-normal px-3 text-decoration-none hover-opacity" asp-area="" asp-controller="Product" asp-action="Index">E-commerce</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white h6 fw-normal px-3 text-decoration-none hover-opacity" asp-area="" asp-controller="Home" asp-action="Index">FedelityCard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white h6 fw-normal px-3 text-decoration-none hover-opacity" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                        </li>
+
+						<div class="d-flex flex-nowrap ms-3 ms-md-0 mb-3">
+							<i class="bi bi-cart-fill text-white  d-block d-md-none fs-4 pe-3"></i>
+							<i class="bi bi-person-fill text-white  d-block d-md-none fs-4"></i>
+						</div>
+                         
+                            
+                     
+                     
+                       
                     </ul>
+                    <div class="text-md-end me-md-5 d-none d-md-block">
+                    <ul class="navbar-nav flex-grow-1 ">
+                        <li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li>
+                        <li class="nav-link"><i class="bi bi-person-fill text-white fs-4"></i></li>
+                    </ul>
+                    </div>
+                   
+                  
+                       
+                       
+                    
                 </div>
             </div>
         </nav>
@@ -35,11 +63,7 @@
             @RenderBody()
         </main>
     </div>
-    @* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - BeviSano - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> *@
+   
     <footer class="bg_footer text-white py-5 px-3 mt-5">
         <div class="container">
             <div class="row jus">

@@ -7,38 +7,39 @@
 }
 
 
-<h4 class="text-center mb-4 text-primary">Modifica prodotto</h4>
+<h4 class="mb-4 fw-normal">Stai modificando: <br /> <span class="display-1">@Model.Name_Product</span></h4>
 
 <div class="container">
-    <p>@Model.Name_Product</p>
     <form method="post" asp-controller="Admin" asp-action="SaveEdit" asp-route-id=@Model.Id_Product>
-        <div class="card shadow-sm rounded-3 p-4">
+        <div class="card shadow-sm rounded-3 p-4 bg_form_complete">
             <div class="card-body">
                 <input type="hidden" name="Id" asp-for="@Model.Id_Product" />
+                <div class="d-flex justify-content-between g-3">
+                    <div class="form-group mb-3" style="width: 50%">
+                        <label for="name" class="form-label h5 fw-normal m-3 ms-1" asp-for="Name_Product"></label>
+                        <input type="text" class="form-control form-control-lg" id="name" asp-for="Name_Product" required />
+                        <span class="text-danger" asp-validation-for="Name_Product"></span>
+                    </div>
 
-                <div class="form-group mb-3">
-                    <label for="name" class="form-label" asp-for="Name_Product"></label>
-                    <input type="text" class="form-control form-control-lg" id="name" asp-for="Name_Product" required />
-                    <span class="text-danger" asp-validation-for="Name_Product"></span>
+
+                    <div class="form-group mb-3" style="width: 50%">
+                        <label for="price" class="form-label h5 fw-normal m-3 ms-1" asp-for="Price_Product"></label>
+                        <input type="number" step="0.01" class="form-control form-control-lg" id="price" asp-for="Price_Product" required />
+                        <span class="text-danger" asp-validation-for="Price_Product"></span>
+                    </div>
+
                 </div>
 
 
                 <div class="form-group mb-3">
-                    <label for="price" class="form-label" asp-for="Price_Product"></label>
-                    <input type="number" step="0.01" class="form-control form-control-lg" id="price" asp-for="Price_Product" required />
-                    <span class="text-danger" asp-validation-for="Price_Product"></span>
-                </div>
-
-
-                <div class="form-group mb-3">
-                    <label for="description" class="form-label" asp-for="Description_Product"></label>
+                    <label for="description" class="form-label h5 fw-normal m-3 ms-1" asp-for="Description_Product"></label>
                     <textarea class="form-control form-control-lg" id="description" rows="4" required" asp-for="Description_Product"></textarea>
                     <span class="text-danger" asp-validation-for="Description_Product"></span>
                 </div>
 
 
                 <div class="form-group mb-3">
-                    <label for="coverImage" class="form-label" asp-for="Cover_Product"></label>
+                    <label for="coverImage" class="form-label h5 fw-normal m-3 ms-1" asp-for="Cover_Product"></label>
                     <input type="text" class="form-control form-control-lg" id="coverImage" asp-for="Cover_Product" required />
                     <span class="text-danger" asp-validation-for="Cover_Product"></span>
                 </div>
@@ -53,32 +54,32 @@
                     <label for="AddImg2" class="form-label">Immagine aggiuntiva 2</label>
                     <input type="url" class="form-control form-control-lg" id="AddImg2" name="AddImg2" value="@Model.AddImg2" />
                 </div> 
-                
+
                 <div class="form-group mb-4">
                     <label for="AddImg3" class="form-label">Immagine aggiuntiva 3</label>
                     <input type="url" class="form-control form-control-lg" id="AddImg3" name="AddImg3" value="@Model.AddImg3" />
                 </div> *@
 
                 <div class="form-group mb-3">
-                    <label for="stock" class="form-label" asp-for="Stock_Product"></label>
+                    <label for="stock" class="form-label h5 fw-normal m-3 ms-1" asp-for="Stock_Product"></label>
                     <input type="number" step="1" min="0" class="form-control form-control-lg" id="stock" asp-for="Stock_Product" required />
                     <span class="text-danger" asp-validation-for="Stock_Product"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="seller" class="form-label" asp-for="Seller_Product"></label>
+                    <label for="seller" class="form-label h5 fw-normal m-3 ms-1" asp-for="Seller_Product"></label>
                     <input type="text" class="form-control form-control-lg" id="seller" asp-for="Seller_Product" required />
                     <span class="text-danger" asp-validation-for="Seller_Product"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="sale" class="form-label" asp-for="Sale_Product"></label>
+                    <label for="sale" class="form-label h5 fw-normal m-3 ms-1" asp-for="Sale_Product"></label>
                     <input type="number" min="0" max="99" step="1" class="form-control form-control-lg" id="sale" asp-for="Sale_Product" required />
                     <span class="text-danger" asp-validation-for="Sale_Product"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="deliveryTime" class="form-label" asp-for="Arrival_Date_Product"></label>
+                    <label for="deliveryTime" class="form-label h5 fw-normal m-3 ms-1" asp-for="Arrival_Date_Product"></label>
                     <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
                     <span class="text-danger" asp-validation-for="Arrival_Date_Product"></span>
                 </div>

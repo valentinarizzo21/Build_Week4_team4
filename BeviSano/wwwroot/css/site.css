@@ -1,3 +1,5 @@
+/*regole generali*/
+
 * {
     padding: 0;
     margin: 0;
@@ -7,6 +9,12 @@
 body {
     background-color: #F2F1E7;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/*footer*/
 
 .bg_footer {
     background: #915b4a;
@@ -47,3 +55,50 @@ hr:not([size]) {
 .hover-opacity:hover::after {
     width: 100%;
 }
+
+/*card*/
+
+@media (max-width: 768px) {
+    .card .position-relative {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card .position-relative {
+        height: 150px;
+    }
+}
+
+.btn-check:focus + .btn, .btn:focus {
+    box-shadow: none !important;
+}
+
+.btn_home {
+    width: 200px !important;
+}
+
+.bg_form_complete, .form-group input, .form-group textarea {
+    background: #f2f1e7 !important;
+}
+
+.form-control:focus {
+    background: #f2f1e7 !important;
+    border-color: black !important;
+    border: 1px solid #ced4da !important;
+    box-shadow: none !important;
+}
+
+
+/*navbar*/
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    box-shadow: none !important;
+    color: white !important;
+    filter: invert(1) !important;
+}
+/*
+.navbar-toogle-icon{
+   filter: invert(1) !important;
+}*/
+
