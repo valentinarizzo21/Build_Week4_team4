@@ -1,3 +1,5 @@
+/*regole generali*/
+
 * {
     padding: 0;
     margin: 0;
@@ -11,6 +13,8 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+/*footer*/
 
 .bg_footer {
     background: #915b4a;
@@ -52,6 +56,8 @@ hr:not([size]) {
     width: 100%;
 }
 
+/*card*/
+
 @media (max-width: 768px) {
     .card .position-relative {
         height: 200px;
@@ -82,4 +88,17 @@ hr:not([size]) {
     border: 1px solid #ced4da !important;
     box-shadow: none !important;
 }
+
+
+/*navbar*/
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    box-shadow: none !important;
+    color: white !important;
+    filter: invert(1) !important;
+}
+/*
+.navbar-toogle-icon{
+   filter: invert(1) !important;
+}*/
 
