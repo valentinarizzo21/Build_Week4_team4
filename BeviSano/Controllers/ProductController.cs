@@ -43,14 +43,12 @@ namespace BeviSano.Controllers
                                 Arrival_Date_Product = reader.GetInt32(7),
                                 Cover_Product = reader.GetString(8),
                                 Id_Category = reader.GetInt32(9),
-                            }
-                        ;
+                            };
                             Products.Products.Add(product);
                         }
                     }
                 }
             }
-
 
             return View(Products);
         }
@@ -65,8 +63,7 @@ namespace BeviSano.Controllers
                 string query = "SELECT * FROM Products WHERE Id_Product = @id";
                 await using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    
-                    command.Parameters.AddWithValue("@id", id); 
+                    command.Parameters.AddWithValue("@id", id);
                     await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
