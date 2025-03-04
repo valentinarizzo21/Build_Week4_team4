@@ -18,7 +18,11 @@ public class HomeController : Controller
             .AddJsonFile("appsettings.json", false, true)
             .Build();
 
+       
+        
         _connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        GetCategories();
     }
 
     public static CategoriesList categories = new CategoriesList();
