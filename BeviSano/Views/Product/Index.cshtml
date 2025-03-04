@@ -5,11 +5,11 @@
 
 <h1 class="text-center my-4" style="color: #915b4a">Prodotti</h1>
 <div class="container">
-    <div class="row g-4 justify-content-center">
+    <div class="row g-4 justify-content-start">
         @foreach (var item in Model.Products)
         {
-            <div class="col-md-4 d-flex justify-content-between">
-                <div class="card shadow-lg border-0 rounded-3 w-100" style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color:#a96851;">
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card shadow-lg border-1 w-100" style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color:rgba(169,104,81, 0.2);">
                     <div class="p-4">
                         <img src="@item.Cover_Product" class="card-img-top" alt="ImageProduct" style="height: 420px; object-fit: cover; border-radius: 0.5rem;">
                     </div>
