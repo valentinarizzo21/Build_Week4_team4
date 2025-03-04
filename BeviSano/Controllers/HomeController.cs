@@ -20,6 +20,35 @@ public class HomeController : Controller
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
+    public static CategoriesList categories = new CategoriesList();
+
+    public async void GetCategories()
+    {
+        await using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            await connection.OpenAsync();
+
+            string query = "SELECT * FROM Categories;";
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var category = new Category()
+                        {
+                            Id_Category = reader.GetInt32(0),
+                            Title = reader.GetString(1),
+                        };
+
+                        HomeController.categories.Categories.Add(category);
+                    }
+                }
+            }
+        }
+    }
+
     public IActionResult Index()
     {
         return View();
