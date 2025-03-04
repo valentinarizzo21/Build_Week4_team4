@@ -35,10 +35,58 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - BeviSano - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer> *@
+    <footer class="bg_footer text-white py-5 px-3 mt-5">
+        <div class="container">
+            <div class="row jus">
+                <div class="col-md-4 text-center">
+                    <img src="~/lib/img/bevi_sano_footer.png" alt="logo_footer" class="img-fluid mx-auto d-block" style="max-width: 200px; height: auto;" />
+                    <p class="mt-2 text-center">
+                        Scopri il mondo dei cocktail e bevi con consapevolezza.
+                    </p>
+                </div>
+                <div class="col-md-4 d-flex flex-column flex-md-row justify-content-center justify-content-md-between text-center text-md-start">
+                    <div class="color_link ms-md-4 mt-3 mt-md-0 align-self-center">
+                        <h3 class="fw-semibold fs-5">Esplora</h3>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Cocktail</a>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Ricette</a>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Consigli</a>
+                    </div>
+                    <div class="ms-md-4 mt-3 mt-md-0 align-self-center">
+                        <h3 class="fw-semibold fs-5">Account</h3>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Accedi</a>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Registrati</a>
+                        <a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Supporto</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 text-center text-md-end align-self-center">
+                    <h3 class="fw-semibold fs-5">Seguici:</h3>
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <a href="javascript:void(0)" class="hover-opacity">
+                            <img src="~/lib/img/facebook_icon.png" alt="Facebook" class="img-fluid" style="width: 40px; height: 30px;">
+                        </a>
+                        <a href="javascript:void(0)" class="hover-opacity">
+                            <img src="~/lib/img/instagram_logo.png" alt="Instagram" class="img-fluid" style="width: 30px; height: 30px;">
+                        </a>
+                        <a href="javascript:void(0)" class="hover-opacity">
+                            <img src="~/lib/img/whatsapp_icon.png" alt="Whatsapp" class="img-fluid" style="width: 30px; height: 30px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="text-center mt-3">
+                <p class="fst-italic">© 2025 Bevi Sano. Bevi responsabilmente.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="javascript:void(0)" class="text-decoration-none">Privacy Policy</a>
+                    <a href="javascript:void(0)" class="text-decoration-none">Termini e Condizioni</a>
+                    <a href="javascript:void(0)" class="text-decoration-none">Contattaci</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

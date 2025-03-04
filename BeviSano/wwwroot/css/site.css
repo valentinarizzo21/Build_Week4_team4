@@ -1,22 +1,45 @@
-html {
-  font-size: 14px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.bg_footer {
+    background: #915b4a;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+a[b-mtcdh73qc4] {
+    color: white !important;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+hr:not([size]) {
+    height: 1.5px;
 }
 
-body {
-  margin-bottom: 60px;
+.hover-opacity {
+    transition: all 0.3s ease-in-out;
+    color: white;
+    position: relative;
+}
+
+.hover-opacity:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+}
+
+.hover-opacity::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width 0.3s ease-in-out;
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    transform: translateX(-50%);
+}
+
+.hover-opacity:hover::after {
+    width: 100%;
 }
