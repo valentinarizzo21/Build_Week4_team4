@@ -4,35 +4,47 @@
 }
 
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-between">
 
-        <div class="col-md-4">
-            <div class="card border-0 shadow-lg bg-transparent mt-5">
-                <img src="@Model.Cover_Product" class="img-fluid rounded shadow-lg product-detail-image" alt="@Model.Name_Product">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-6 p-0">
+                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product"></div>
+                </div>
+                <div class="col-6 p-0">
+                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+                </div>
             </div>
         </div>
-        <div class="col-md-8">
-			<div class="product-info p-4 rounded shadow  bg-light bg-opacity-75 mt-5 d-flex flex-column">
-				<h5 class="h5 text-secondary opacity-50 mb-2">Hai selezionato: </h5>
-
-                <h3 class="mt-2 mb-2">
-
-                    @Model.Name_Product
-                </h3>
-
-                <p class="lead price-box"><strong>@Model.Price_Product.ToString("0.00") €</strong></p>
-                <p class="text-muted">@Model.Description_Product</p>
-
-                <h4 class="mt-4 text-secondary fw-normal">Altre immagini</h4>
-                <div class="d-flex flex-wrap">
-                   @*  @foreach (var img in Model.ImmaginiAggiuntive)
-                    {} *@
-                        <img src="@Model.Cover_Product" class="img-thumbnail mx-2" style="width: 200px; height: 200px; border-radius: 8px; object-fit: cover;" alt="Immagine aggiuntiva">
-                    
+        <div class="col-md-5">
+            <div class="product-info p-4 rounded d-flex flex-column" style="background-color: #f2f1e7;">
+                <div class="row">
+                    <p class="text-end fw-bold" style="color: #5c4d4d;">Cod: @Model.Id_Product</p>
                 </div>
-
-                <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-secondary mt-4 p-2 align-self-end">Torna alla Vetrina</a>
+                <div class="row mt-3">
+                    <div class="col-7">
+                        <p style="color: #915b4a;">Categoria</p>
+                        <h2 style="color: #5c4d4d;">@Model.Name_Product</h2>
+                    </div>
+                    <div class="col-5">
+                        <h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4>
+                    </div>
+                </div>
+                <hr style="border-color: #915b4a;" />
+                <div class="row mt-3">
+                    <p class="text-muted">@Model.Description_Product</p>
+                </div>
+                <div class="row">
+                    <a asp-controller="" asp-action="" class="btn btn-sm text-white mt-4 p-2 align-self-end" style="background-color: #5c4d4d; border-color: #5c4d4d;">Aggiungi al carrello</a>
+                </div>
+                <div class="row">
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-sm text-white mt-4 p-2 align-self-end" style="background-color: #915b4a; border-color: #915b4a;">Torna alla Vetrina</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+

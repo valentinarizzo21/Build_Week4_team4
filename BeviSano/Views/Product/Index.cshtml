@@ -3,29 +3,23 @@
     ViewData["Title"] = "BeviSano";
 }
 
-<h1 class="text-center my-4">Prodotti</h1>
+<h1 class="text-center my-4" style="color: #915b4a">Prodotti</h1>
 <div class="container">
-    
-    <div class="d-flex justify-content-end mb-4 mt-3 me-1">
-        <a class="btn btn-sm btn-danger align-items-center">
-            Aggiungi
-        </a>
-    </div>
-    <div class="row g-4 justify-content-center">
+    <div class="row g-4 justify-content-start">
         @foreach (var item in Model.Products)
         {
-            <div class="col-md-4 d-flex justify-content-between">
-                <div class="card shadow-lg border-0 rounded-3  w-100" >
-                    <div class="p-5">
-                    <img src="@item.Cover_Product" class="card-img-top" alt="ImageProduct" style=" height:400px; object-fit: cover; border-radius: 0.5rem;">
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card shadow-lg border-1 w-100" style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color:rgba(169,104,81, 0.2);">
+                    <div class="p-4">
+                        <img src="@item.Cover_Product" class="card-img-top" alt="ImageProduct" style="height: 420px; object-fit: cover; border-radius: 0.5rem;">
                     </div>
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">@item.Name_Product</h5>
-                        <p class="card-text text-muted">@item.Description_Product</p>
+                        <h5 class="card-title" style="color: #5c4d4d; font-weight: bold;">@item.Name_Product</h5>
+                        <p class="card-text" style="color: #915b4a;">@item.Description_Product</p>
                         <p class="card-text fw-bold text-success">@item.Price_Product.ToString("0.00") €</p>
                         <div class="mt-auto d-flex justify-content-between">
-                            <a asp-controller="Product" asp-action="Cart" asp-route-id="@item.Id_Product" class="btn btn-outline-primary w-50 me-2">+ Carrello</a>
-                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product" class="btn btn-primary w-50">Dettagli</a>
+                            <a asp-controller="Product" asp-action="Cart" asp-route-id="@item.Id_Product" class="btn w-50 me-2" style="border-color: #915b4a; color: #915b4a;">+ Carrello</a>
+                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product" class="btn w-50 text-white" style="background-color: #915b4a; border-color: #915b4a;">Dettagli</a>
                         </div>
                     </div>
                 </div>
