@@ -47,3 +47,19 @@ hr:not([size]) {
 .hover-opacity:hover::after {
     width: 100%;
 }
+
+.btn_home{
+    width: 200px !important;
+}
+
+@media (max-width: 768px) {
+    .card .position-relative {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card .position-relative {
+        height: 150px;
+    }
+}
