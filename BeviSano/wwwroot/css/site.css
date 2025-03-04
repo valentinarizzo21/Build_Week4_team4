@@ -8,6 +8,10 @@ body {
     background-color: #F2F1E7;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .bg_footer {
     background: #915b4a;
 }
@@ -48,10 +52,6 @@ hr:not([size]) {
     width: 100%;
 }
 
-.btn_home{
-    width: 200px !important;
-}
-
 @media (max-width: 768px) {
     .card .position-relative {
         height: 200px;
@@ -62,4 +62,8 @@ hr:not([size]) {
     .card .position-relative {
         height: 150px;
     }
+}
+
+.btn-check:focus + .btn, .btn:focus {
+    box-shadow: none !important;
 }
