@@ -7,7 +7,7 @@ namespace BeviSano.Controllers;
 
 public class HomeController : Controller
 {
-    public static Account MainAccount { get; set; }
+    public static Account? MainAccount { get; set; }
 
     private readonly string _connectionString;
 
@@ -107,6 +107,13 @@ public class HomeController : Controller
         }
     }
 
+    public IActionResult Logout()
+    {
+        MainAccount = null;
+
+        return RedirectToAction("Index");
+    }
+
     [HttpPost]
     public async Task<IActionResult> AddAccount(AddAccount addAccount)
     {
@@ -152,6 +159,11 @@ public class HomeController : Controller
         }
         MainAccount = account;
         return RedirectToAction("Index", "Product");
+    }
+
+    public IActionResult FidelityCard()
+    {
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
