@@ -90,6 +90,43 @@ namespace BeviSano.Controllers
             await using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
+
+                string checkStockQuery = "SELECT Stock_Product FROM Products WHERE Id_Product = @id";
+                int stock = 0;
+                await using (SqlCommand checkStockCommand = new SqlCommand(checkStockQuery, connection))
+                { 
+                    checkStockCommand.Parameters.AddWithValue("@id", id);
+                    await using (SqlDataReader reader = await checkStockCommand.ExecuteReaderAsync()) 
+                    {
+                        if (await reader.ReadAsync()) 
+                        { 
+                            stock = reader.GetInt32(0);
+                        }
+                    }
+                }
+
+                string checkQuantityQuery = "SELECT Quantity_Product FROM Cart WHERE Id_Cart = @id_Account AND Id_Product = @id";
+                int quantity = 0;
+                await using (SqlCommand checkQuantityCommand = new SqlCommand(checkQuantityQuery, connection))
+                {
+                    checkQuantityCommand.Parameters.AddWithValue("@id_Account", HomeController.MainAccount.Id);
+                    checkQuantityCommand.Parameters.AddWithValue("@id", id);
+                    await using (SqlDataReader reader = await checkQuantityCommand.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            quantity = reader.GetInt32(0);
+                        }
+                    }
+                }
+
+                if (quantity >= stock)
+                {
+                    TempData["ErrorMessage"] = "Quantità non disponibile al momento";
+                    TempData["idProduct"] = id;
+                    return RedirectToAction("Index");
+                }
+
                 string checkQuery = "SELECT * FROM Cart WHERE Cart.Id_Product = @id AND Id_Cart = @account_id";
                 await using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
                 {
@@ -132,6 +169,42 @@ namespace BeviSano.Controllers
             await using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
+
+                string checkStockQuery = "SELECT Stock_Product FROM Products WHERE Id_Product = @id";
+                int stock = 0;
+                await using (SqlCommand checkStockCommand = new SqlCommand(checkStockQuery, connection))
+                {
+                    checkStockCommand.Parameters.AddWithValue("@id", id);
+                    await using (SqlDataReader reader = await checkStockCommand.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            stock = reader.GetInt32(0);
+                        }
+                    }
+                }
+
+                string checkQuantityQuery = "SELECT Quantity_Product FROM Cart WHERE Id_Cart = @id_Account AND Id_Product = @id";
+                int quantity2 = 0;
+                await using (SqlCommand checkQuantityCommand = new SqlCommand(checkQuantityQuery, connection))
+                {
+                    checkQuantityCommand.Parameters.AddWithValue("@id_Account", HomeController.MainAccount.Id);
+                    checkQuantityCommand.Parameters.AddWithValue("@id", id);
+                    await using (SqlDataReader reader = await checkQuantityCommand.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            quantity2 = reader.GetInt32(0);
+                        }
+                    }
+                }
+
+                if (quantity2 + quantity > stock)
+                {
+                    TempData["ErrorMessage"] = "Quantità non disponibile al momento";
+                    return RedirectToAction("Detail", new { id = id });
+                }
+
                 string checkQuery = "SELECT * FROM Cart WHERE Cart.Id_Product = @id AND Id_Cart = @account_id";
                 await using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
                 {
@@ -150,7 +223,7 @@ namespace BeviSano.Controllers
                                 updateCommand.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
                                 await updateCommand.ExecuteNonQueryAsync();
                             }
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Detail", new { id = id });
                         }
                         reader.Close();
                     }
@@ -166,7 +239,7 @@ namespace BeviSano.Controllers
                     await command.ExecuteNonQueryAsync();
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Detail", new { id = id });
         }
     }
 }

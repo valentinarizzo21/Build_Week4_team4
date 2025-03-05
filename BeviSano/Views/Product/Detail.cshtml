@@ -2,6 +2,7 @@
 @using BeviSano.Controllers
 @{
 	ViewData["Title"] = "BeviSano";
+	var errorMessage = TempData["ErrorMessage"] as string;
 }
 
 <div class="container">
@@ -78,10 +79,14 @@
 						Torna alla Vetrina
 					</a>
 				</div>
-
 			</div>
-
 		</div>
+		@if (!string.IsNullOrEmpty(errorMessage))
+		{
+			<p class="text-danger">
+				@errorMessage
+			</p>
+		}
 	</div>
 </div>
 
