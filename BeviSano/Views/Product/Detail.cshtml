@@ -1,50 +1,74 @@
 ﻿@model SingleProduct
 @{
-    ViewData["Title"] = "BeviSano";
+	ViewData["Title"] = "BeviSano";
 }
 
 <div class="container">
-    <div class="row justify-content-between">
+	<div class="row justify-content-between">
 
-        <div class="col-md-7">
-            <div class="row">
-                <div class="col-6 p-0">
-                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
-                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product"></div>
-                </div>
-                <div class="col-6 p-0">
-                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
-                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="product-info p-4 rounded d-flex flex-column" style="background-color: #f2f1e7;">
-                <div class="row">
-                    <p class="text-end fw-bold" style="color: #5c4d4d;">Cod: @Model.Id_Product</p>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-7">
-                        <p style="color: #915b4a;">Categoria</p>
-                        <h2 style="color: #5c4d4d;">@Model.Name_Product</h2>
-                    </div>
-                    <div class="col-5">
-                        <h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4>
-                    </div>
-                </div>
-                <hr style="border-color: #915b4a;" />
-                <div class="row mt-3">
-                    <p class="text-muted">@Model.Description_Product</p>
-                </div>
-                <div class="row">
-                    <a asp-controller="" asp-action="" class="btn btn-sm text-white mt-4 p-2 align-self-end" style="background-color: #5c4d4d; border-color: #5c4d4d;">Aggiungi al carrello</a>
-                </div>
-                <div class="row">
-                    <a asp-controller="Product" asp-action="Index" class="btn btn-sm text-white mt-4 p-2 align-self-end" style="background-color: #915b4a; border-color: #915b4a;">Torna alla Vetrina</a>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="col-md-7">
+			<div class="row">
+				<div class="col-6 p-0">
+					<div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+					<div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product"></div>
+				</div>
+				<div class="col-6 p-0">
+					<div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+					<div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="product-info p-4 rounded d-flex flex-column" style="background-color: #f2f1e7;">
+				<div class="row">
+					<p class="text-end fw-bold" style="color: #5c4d4d;">Cod: @Model.Id_Product</p>
+				</div>
+				<div class="row mt-3">
+					<div class="col-7">
+						<p style="color: #915b4a;">Categoria</p>
+						<h2 style="color: #5c4d4d;">@Model.Name_Product</h2>
+						<p style="color: #5c4d4d;">@Model.Seller_Product</p>
+					</div>
+					<div class="col-5">
+						<h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4>
+					</div>
+				</div>
+				<hr style="border-color: #915b4a;" />
+				<div class="row mt-3">
+					<p class="text-muted">@Model.Description_Product</p>
+				</div>
+
+				<div class="row mt-3">
+					<div class="d-flex justify-content-end align-items-center mx-0 px-0">
+						<select class="form-select" aria-label="Seleziona quantità">
+							<option selected>Quantità</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+						</select>
+						<a asp-controller="Product" asp-action="Cart" class="btn btnCart m-0 ms-2" style="border-color: #915b4a; color: #915b4a;">
+							<i class="bi bi-cart-fill"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="row">
+					<a asp-controller="Product" asp-action="Index" class="btn btn-sm text-white mt-4 p-2 align-self-end" style="background-color: #915b4a; border-color: #915b4a;">
+						Torna alla Vetrina
+					</a>
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
 </div>
+
 
 

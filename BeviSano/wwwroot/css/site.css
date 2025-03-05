@@ -102,3 +102,19 @@ hr:not([size]) {
    filter: invert(1) !important;
 }*/
 
+.form-select {
+    border-color: #915b4a;
+    color: #915b4a;
+    width: 150px;
+    background: #f2f1e7 !important;
+}
+
+.form-select:focus {
+    border-color: #915b4a;
+    box-shadow: transparent;
+}
+
+.btnCart {
+    width:40px;
+}
+
