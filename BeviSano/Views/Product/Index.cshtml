@@ -2,6 +2,8 @@
 @using BeviSano.Controllers
 @{
 	ViewData["Title"] = "BeviSano";
+	var errorMessage = TempData["ErrorMessage"] as string;
+	var id = TempData["idProduct"] as Guid?;
 }
 
 <h1 class="text-center my-4" style="color: #915b4a">Prodotti</h1>
@@ -32,6 +34,12 @@
 							<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product" class="btn btn_home text-white" style="background-color: #915b4a; border-color: #915b4a;">Dettagli</a>
 						</div>
 					</div>
+					@if (!string.IsNullOrEmpty(errorMessage) && item.Id_Product == id)
+					{
+						<p class="text-danger">
+							@errorMessage
+						</p>
+					}
 				</div>
 			</div>
 		}
@@ -42,7 +50,7 @@
 {
 	<script>
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) 
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl)
 		{
 		  return new bootstrap.Tooltip(tooltipTriggerEl)
 		})

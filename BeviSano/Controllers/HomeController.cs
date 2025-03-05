@@ -133,7 +133,7 @@ public class HomeController : Controller
             }
 
             string query =
-                "INSERT INTO Account (Name_Account, Email, Password_Account) VALUES (@name, @email, @password)";
+                "INSERT INTO Account (Name_Account, Email, Password_Account) OUTPUT INSERTED.Id_Account VALUES (@name, @email, @password)";
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@name", addAccount.Name);
