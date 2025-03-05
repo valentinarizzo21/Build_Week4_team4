@@ -1,0 +1,21 @@
+﻿@using BeviSano.Controllers
+@{
+    ViewData["Title"] = "Fidelity Card";
+    Account MainAccount = HomeController.MainAccount;
+}
+
+<h2>Fidelity Card</h2>
+@if (MainAccount != null)
+{
+    <h5>Ciao @MainAccount.Name</h5>
+}
+
+<div>
+    @if (MainAccount == null)
+    {
+        <p class="lead">Accedi o Registrati per vedere la tua card e ottenere magnifici sconti esclusivi!</p>
+    } else
+    {
+        <p>bentornato</p>
+    }
+</div>

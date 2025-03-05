@@ -154,6 +154,11 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Product");
     }
 
+    public IActionResult FidelityCard()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
