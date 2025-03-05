@@ -5,8 +5,6 @@ Id_Category INT IDENTITY(1, 1) PRIMARY KEY,
 Title NVARCHAR(250) NOT NULL,
 );
 
-
-
 create table Products (
 Id_Product UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 Name_Product NVARCHAR(250) NOT NULL,
@@ -65,8 +63,6 @@ INSERT INTO Categories (Title) VALUES
 ('Gin');
 
 select * from categories
-
-
 
 INSERT INTO Products (Name_Product, Price_Product, Description_Product, Stock_Product, Seller_Product, Sale_Product, Arrival_Date_Product, Cover_Product, Id_Category)
 VALUES
