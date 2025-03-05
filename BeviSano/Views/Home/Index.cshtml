@@ -1,6 +1,9 @@
-﻿@model LoginViewModel
+﻿@using BeviSano.Controllers
+
+@model LoginViewModel
+
 @{
-	ViewData["Title"] = "Login";
+	ViewData["Title"] = "Home";
 }
 
 
@@ -54,8 +57,11 @@
 			</p>
 		</div>
 	</div>
+
 	<hr style="color:#5c4d4d" />
-	<div class="row">
+@if (HomeController.MainAccount == null)
+	{
+	<div class="row" id="login">
 		<div class="d-flex justify-content-center align-items-center mt-4">
 			<div class="p-4 rounded shadow-lg" style="background-color: #f2f1e7; width: 600px;">
 				<h2 class="text-center" style="color: #5c4d4d;">Accedi</h2>
@@ -79,6 +85,7 @@
 				</form>
 			</div>
 		</div>
+    }
 	</div>
 </div>
 

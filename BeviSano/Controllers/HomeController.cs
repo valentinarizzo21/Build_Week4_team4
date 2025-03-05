@@ -7,7 +7,7 @@ namespace BeviSano.Controllers;
 
 public class HomeController : Controller
 {
-    public static Account MainAccount { get; set; }
+    public static Account? MainAccount { get; set; }
 
     private readonly string _connectionString;
 
@@ -105,6 +105,13 @@ public class HomeController : Controller
             MainAccount = account;
             return RedirectToAction("Index", "Product");
         }
+    }
+
+    public IActionResult Logout()
+    {
+        MainAccount = null;
+
+        return RedirectToAction("Index");
     }
 
     [HttpPost]
