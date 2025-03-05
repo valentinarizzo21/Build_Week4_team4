@@ -15,7 +15,6 @@ body {
 }
 
 /*footer*/
-
 .bg_footer {
     background: #915b4a;
 }
@@ -84,21 +83,50 @@ hr:not([size]) {
 
 .form-control:focus {
     background: #f2f1e7 !important;
-    border-color: black !important;
+    border: 1px solid #915b4a !important;
+    box-shadow: none !important;
+}
+
+.form-select:focus {
+    background: #f2f1e7 !important;
+    border: 1px solid #915b4a !important;
+    box-shadow: none !important;
+}
+.form-select {
+    background: #f2f1e7 !important;
     border: 1px solid #ced4da !important;
     box-shadow: none !important;
 }
 
-
+.shadow-sm {
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.15), 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
 /*navbar*/
-
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     box-shadow: none !important;
-    color: white !important;
-    filter: invert(1) !important;
 }
-/*
-.navbar-toogle-icon{
-   filter: invert(1) !important;
-}*/
+
+
+
+
+.form-select {
+    border-color: #915b4a;
+    color: #915b4a;
+    width: 150px;
+    background: #f2f1e7 !important;
+}
+
+.form-select:focus {
+    border-color: #915b4a;
+    box-shadow: transparent;
+}
+
+.btnCart {
+    width:40px;
+}
+
+.carousel-mood {
+    width:400px;
+    height:400px;
+}
 

@@ -10,7 +10,7 @@
 }
 
 
-<h4 class="mb-4 fw-normal">Stai modificando: <br /> <span class="display-1">@Model.Name_Product</span></h4>
+<h4 class="ms-2 mb-4 fw-normal">Stai modificando:<br /><span class="display-1">@Model.Name_Product</span></h4>
 
 <div class="container">
     <form method="post" asp-controller="Admin" asp-action="SaveEdit" asp-route-id=@Model.Id_Product>
@@ -22,13 +22,14 @@
                 <input type="hidden" name="IdImageThree" value=@Model.Id_Image_Three />
 
                 <div class="d-flex justify-content-between g-3">
-                    <div class="form-group mb-3" style="width: 50%">
+                    <div class="form-group mb-3 w-75 me-2">
                         <label for="name" class="form-label h5 fw-normal m-3 ms-1" asp-for="Name_Product"></label>
                         <input type="text" class="form-control form-control-lg" id="name" asp-for="Name_Product" required />
                         <span class="text-danger" asp-validation-for="Name_Product"></span>
                     </div>
 
-                    <div class="form-group mb-3" style="width: 50%">
+
+                    <div class="form-group mb-3 w-25">
                         <label for="price" class="form-label h5 fw-normal m-3 ms-1" asp-for="Price_Product"></label>
                         <input type="number" step="0.01" class="form-control form-control-lg" id="price" asp-for="Price_Product" required />
                         <span class="text-danger" asp-validation-for="Price_Product"></span>
@@ -63,55 +64,62 @@
                     <span class="text-danger" asp-validation-for="Image_Two"></span>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="ImaheThree" class="form-label" asp-for="Image_Three"></label>
-                    <input type="text" class="form-control form-control-lg" id="ImaheThree" asp-for="Image_Three" />
-                    <span class="text-danger" asp-validation-for="Image_Three"></span>
+                <div class="form-group mb-4">
+                    <label for="AddImg3" class="form-label">Immagine aggiuntiva 3</label>
+                    <input type="url" class="form-control form-control-lg" id="AddImg3" name="AddImg3" value="@Model.AddImg3" />
+                </div> *@
+                <div class="d-flex justify-content-between">
+                    <div class="form-group mb-3 w-75 me-2">
+                        <label for="seller" class="form-label h5 fw-normal m-3 ms-1" asp-for="Seller_Product"></label>
+                        <input type="text" class="form-control form-control-lg" id="seller" asp-for="Seller_Product" required />
+                        <span class="text-danger" asp-validation-for="Seller_Product"></span>
+                    </div>
+                    <div class="form-group mb-3 w-25">
+                        <label for="stock" class="form-label h5 fw-normal m-3 ms-1" asp-for="Stock_Product"></label>
+                        <input type="number" step="1" min="0" class="form-control form-control-lg" id="stock" asp-for="Stock_Product" required />
+                        <span class="text-danger" asp-validation-for="Stock_Product"></span>
+                    </div>
                 </div>
-                @* ------ *@
-
-                <div class="form-group mb-3">
-                    <label for="stock" class="form-label h5 fw-normal m-3 ms-1" asp-for="Stock_Product"></label>
-                    <input type="number" step="1" min="0" class="form-control form-control-lg" id="stock" asp-for="Stock_Product" required />
-                    <span class="text-danger" asp-validation-for="Stock_Product"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="seller" class="form-label h5 fw-normal m-3 ms-1" asp-for="Seller_Product"></label>
-                    <input type="text" class="form-control form-control-lg" id="seller" asp-for="Seller_Product" required />
-                    <span class="text-danger" asp-validation-for="Seller_Product"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="sale" class="form-label h5 fw-normal m-3 ms-1" asp-for="Sale_Product"></label>
-                    <input type="number" min="0" max="99" step="1" class="form-control form-control-lg" id="sale" asp-for="Sale_Product" required />
-                    <span class="text-danger" asp-validation-for="Sale_Product"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="deliveryTime" class="form-label h5 fw-normal m-3 ms-1" asp-for="Arrival_Date_Product"></label>
-                    <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
-                    <span class="text-danger" asp-validation-for="Arrival_Date_Product"></span>
-                </div>
-
-                @* Categoria *@
-                <div class="form-group mb-3">
-                    <label for="deliveryTime" class="form-label" asp-for="Id_Category"></label>
-                    <select class="form-select" asp-for="Id_Category">
-                        <option value="-1">-- seleziona una categoria --</option>
-                        @foreach (var category in categories.Categories)
-                        {
-                            <option value=@category.Id_Category>@category.Title</option>
-                        }
-                    </select>
-                </div>
-
-
-
 
                 <div class="d-flex justify-content-between">
-                    <button class="btn btn-success btn-lg w-48">Salva Modifiche</button>
-                    <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary btn-lg w-48">Annulla</a>
+                    <div class="d-flex flex-column justify-content-start w-75">
+                        <div class="d-flex justify-content-between">
+                            <div class="form-group mb-3 w-50 me-2">
+                                <label for="sale" class="form-label h5 fw-normal m-3 ms-1" asp-for="Sale_Product"></label>
+                                <input type="number" min="0" max="99" step="1" class="form-control form-control-lg" id="sale" asp-for="Sale_Product" required />
+                                <span class="text-danger" asp-validation-for="Sale_Product"></span>
+                            </div>
+
+                            <div class="form-group mb-3 w-50 me-2">
+                                <label for="deliveryTime" class="form-label h5 fw-normal m-3 ms-1" asp-for="Arrival_Date_Product"></label>
+                                <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
+                                <span class="text-danger" asp-validation-for="Arrival_Date_Product"></span>
+                            </div>
+                        </div>
+
+                        @* Categoria *@
+                        <div class="form-group mb-3 w-50">
+                            <label for="Id_Category" class="form-label" asp-for="Id_Category"></label>
+                            <select class="form-select p-2" asp-for="Id_Category">
+                                <option value="-1">-- seleziona una categoria --</option>
+                                @foreach (var category in categories.Categories)
+                                {
+                                    <option value=@category.Id_Category>@category.Title</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <img src="~/lib/img/Bevi_Sano_Home.png"
+                         alt="Logo"
+                         class="w-25 img-fluid"
+                         style="max-width: 200px; height: auto; object-fit: contain;" />
+                </div>
+
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Admin" asp-action="Index" class="btn btn-lg" style="border-color: #915b4a; color: #915b4a;">Annulla</a>
+                    <button class="btn btn-success btn-lg" style="background-color: #915b4a; border-color: #915b4a;">Salva Modifiche</button>
                 </div>
             </div>
         </div>
