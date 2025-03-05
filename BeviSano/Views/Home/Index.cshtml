@@ -1,6 +1,9 @@
-﻿@model LoginViewModel
+﻿@using BeviSano.Controllers
+
+@model LoginViewModel
+
 @{
-	ViewData["Title"] = "Login";
+	ViewData["Title"] = "Home";
 }
 <div class="position-absolute title-absolute m-0 p-0 ">
 	<h1 style="color:#5c4d4d">Welcome to BeviSano!</h1>
@@ -54,24 +57,29 @@
 			Oggi "Bevi sano, bevi e basta" è un punto di riferimento per chi ama bere bene… e con calma. Perché, come dice il loro motto alternativo: "Se lo vuoi subito, esci e compralo. Se vuoi il meglio, aspetta."
 		</div>
 	</div>
-	<div class="row">
-		<form method="post" asp-controller="Home" asp-action="Login">
-			<div>
-				<label for="firstName" asp-for="Name" class="form-label"></label>
-				<input id="firstName" asp-for="Name" class="form-control" />
-				<span class="text-danger" asp-validation-for="Name"></span>
-			</div>
 
-			<div>
-				<label for="firstName" asp-for="Password" class="form-label"></label>
-				<input type="password" id="firstName" asp-for="Password" class="form-control" />
-				<span class="text-danger" asp-validation-for="Password"></span>
-			</div>
+	@if (HomeController.MainAccount == null)
+	{
+		<div class="row" id="login">
+			<form method="post" asp-controller="Home" asp-action="Login">
+				<div>
+					<label for="firstName" asp-for="Name" class="form-label"></label>
+					<input id="firstName" asp-for="Name" class="form-control" />
+					<span class="text-danger" asp-validation-for="Name"></span>
+				</div>
 
-			<button class="btn btn-success" type="submit">Accedi</button>
-			<a class="btn btn-danger" asp-controller="Home" asp-action="Register">Registrati</a>
-		</form>
-	</div>
+				<div>
+					<label for="firstName" asp-for="Password" class="form-label"></label>
+					<input type="password" id="firstName" asp-for="Password" class="form-control" />
+					<span class="text-danger" asp-validation-for="Password"></span>
+				</div>
+
+				<button class="btn btn-success" type="submit">Accedi</button>
+				<a class="btn btn-danger" asp-controller="Home" asp-action="Register">Registrati</a>
+			</form>
+		</div>
+	}
+	
 </div>
 
 
