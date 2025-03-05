@@ -3,44 +3,47 @@
 @{
     ViewData["Title"] = "Pagina Admin";
 }
-
+<div class="container">
 <div>
     <div class="d-flex justify-content-end my-3">
-        <a class="btn btn-success" asp-controller="Admin" asp-action="Add">Aggiungi prodotto</a>
+        <a class="btn text-white p-2" asp-controller="Admin" asp-action="Add" style="background-color: #5c4d4d; border-color: #5c4d4d;">Aggiungi prodotto</a>
     </div>
 
-    <table class="table table-striped table-hover border">
+    <table class="table table-striped table-hover border text-center">
         <thead>
-            <tr class="border">
-                <th>Prodotto</th>
-                <th>Nome</th>
-                <th>Prezzo</th>
-                <th>Quantità disponibili</th>
-                <th>Produttore</th>
-                <th>Sconto applicato</th>
-                <th>Azioni</th>
+                <tr class="border " style="background-color:#5c4d4d; background: rgb(92,77,77);background: linear-gradient(90deg, rgba(92,77,77,1) 40%, rgba(145,91,74,1) 80%); color:white;">
+                <th class="py-3">Prodotto</th>
+                <th class="py-3">Nome</th>
+                <th class="py-3">Prezzo</th>
+                <th class="py-3">Quantità disponibili</th>
+                <th class="py-3">Produttore</th>
+                <th class="py-3">Sconto applicato</th>
+                <th class="py-3">Azioni</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var product in Model.Products)
+            @foreach (var product in Model.Products)
             {
-                <tr class="border">
+                <tr class="border align-middle">
                     <td>
-                        <img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:100px" />
+                        <img src="@product.Cover_Product" alt="@product.Name_Product" style="max-width:100px; border-radius: 4px;" />
                     </td>
-                    <td>@product.Name_Product</td>
+                        <td class="fw-bold" style="color:#5c4d4d;">@product.Name_Product</td>
                     <td>@product.Price_Product.ToString("0.00")€</td>
                     <td>@product.Stock_Product</td>
                     <td>@product.Seller_Product</td>
-                    <td>@product.Sale_Product.ToString("0")</td>
+                    <td>@product.Sale_Product.ToString("0")%</td>
                     <td>
-                        <a class="btn btn-warning" asp-controller="Admin" asp-action="Edit" asp-route-id=@product.Id_Product>Edit</a>
-                        <a class="btn btn-danger" asp-controller="Admin" asp-action="Delete" asp-route-id=@product.Id_Product>Delete</a>
-
+                            <a class="btn text-white me-2" asp-controller="Admin" asp-action="Edit" asp-route-id="@product.Id_Product" style="border-color: #915b4a; color: #915b4a;" >
+                                <i class="bi bi-pencil-fill" style="color:#915b4a;"></i>
+                        </a>
+                            <a class="btn text-white" asp-controller="Admin" asp-action="Delete" asp-route-id="@product.Id_Product" style="background-color: #915b4a; border-color: #915b4a;">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
+</div>
