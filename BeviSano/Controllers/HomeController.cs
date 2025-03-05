@@ -1,7 +1,6 @@
-
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using BeviSano.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
 namespace BeviSano.Controllers;
@@ -11,6 +10,7 @@ public class HomeController : Controller
     public static Account MainAccount { get; set; }
 
     private readonly string _connectionString;
+
     public HomeController()
     {
         var configuration = new ConfigurationBuilder()
@@ -18,8 +18,6 @@ public class HomeController : Controller
             .AddJsonFile("appsettings.json", false, true)
             .Build();
 
-       
-        
         _connectionString = configuration.GetConnectionString("DefaultConnection");
 
         GetCategories();
@@ -31,6 +29,8 @@ public class HomeController : Controller
     {
         await using (SqlConnection connection = new SqlConnection(_connectionString))
         {
+            HomeController.categories.Categories = [];
+
             await connection.OpenAsync();
 
             string query = "SELECT * FROM Categories;";
@@ -75,7 +75,8 @@ public class HomeController : Controller
         await using (SqlConnection connection = new SqlConnection(_connectionString))
         {
             await connection.OpenAsync();
-            string query = "SELECT * FROM Account WHERE Name_Account = @name AND Password_Account = @password";
+            string query =
+                "SELECT * FROM Account WHERE Name_Account = @name AND Password_Account = @password";
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@name", loginData.Name);
@@ -131,7 +132,8 @@ public class HomeController : Controller
                 }
             }
 
-            string query = "INSERT INTO Account (Name_Account, Email, Password_Account) VALUES (@name, @email, @password)";
+            string query =
+                "INSERT INTO Account (Name_Account, Email, Password_Account) VALUES (@name, @email, @password)";
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@name", addAccount.Name);
@@ -155,7 +157,8 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(
+            new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
+        );
     }
 }
-
