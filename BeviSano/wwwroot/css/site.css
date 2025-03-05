@@ -118,3 +118,8 @@ hr:not([size]) {
     width:40px;
 }
 
+.carousel-mood {
+    width:400px;
+    height:400px;
+}
+
