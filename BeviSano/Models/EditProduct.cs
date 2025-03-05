@@ -46,14 +46,20 @@ namespace BeviSano.Models
         [Display(Name = "Immagine principale")]
         public string? Cover_Product { get; set; }
 
-        [Display(Name = "Immagine aggiuntiva")]
+        [Display(Name = "Immagine aggiuntiva 1")]
         public string? Image_One { get; set; }
 
-        [Display(Name = "Immagine aggiuntiva")]
+        public Guid? Id_Image_One { get; set; }
+
+        [Display(Name = "Immagine aggiuntiva 2")]
         public string? Image_Two { get; set; }
 
-        [Display(Name = "Immagine aggiuntiva")]
+        public Guid? Id_Image_Two { get; set; }
+
+        [Display(Name = "Immagine aggiuntiva 3")]
         public string? Image_Three { get; set; }
+
+        public Guid? Id_Image_Three { get; set; }
 
         [Display(Name = "Categoria")]
         public int? Id_Category { get; set; }
