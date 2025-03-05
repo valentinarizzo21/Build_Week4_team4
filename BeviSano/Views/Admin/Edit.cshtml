@@ -10,9 +10,9 @@
 }
 
 
-<h4 class="ms-2 mb-4 fw-normal">Stai modificando:<br /><span class="display-1">@Model.Name_Product</span></h4>
 
 <div class="container">
+    <h4 class="ms-2 mb-4 fw-normal">Stai modificando:<br /><span class="display-1"><i>@Model.Name_Product</i></span></h4>
     <form method="post" asp-controller="Admin" asp-action="SaveEdit" asp-route-id=@Model.Id_Product>
         <div class="card shadow-sm rounded-3 p-4 bg_form_complete">
             <div class="card-body">
@@ -92,7 +92,7 @@
                                 <span class="text-danger" asp-validation-for="Sale_Product"></span>
                             </div>
 
-                            <div class="form-group mb-3 w-50 me-2">
+                            <div class="form-group mb-3 w-50">
                                 <label for="deliveryTime" class="form-label h5 fw-normal m-3 ms-1" asp-for="Arrival_Date_Product"></label>
                                 <input type="number" min="0" step="1" class="form-control form-control-lg" id="deliveryTime" asp-for="Arrival_Date_Product" required />
                                 <span class="text-danger" asp-validation-for="Arrival_Date_Product"></span>
