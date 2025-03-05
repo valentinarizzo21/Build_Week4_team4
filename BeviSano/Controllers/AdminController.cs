@@ -172,6 +172,64 @@ namespace BeviSano.Controllers
                         }
                     }
                 }
+
+                string queryImgs = "SELECT * FROM Images WHERE Id_Product = @IdProduct";
+                await using (SqlCommand commandImgs = new SqlCommand(queryImgs, connection))
+                {
+                    commandImgs.Parameters.AddWithValue("@IdProduct", id);
+
+                    await using (SqlDataReader reader = await commandImgs.ExecuteReaderAsync())
+                    {
+                        List<Image> Images = new List<Image>();
+
+                        while (await reader.ReadAsync())
+                        {
+                            var img = new Image()
+                            {
+                                Id_Image = reader.GetGuid(0),
+                                Url_Image = reader.GetString(2),
+                            };
+
+                            Images.Add(img);
+                        }
+
+                        switch (Images.Count)
+                        {
+                            case 1:
+                                selectedProduct.Id_Image_One = Images[0].Id_Image;
+                                selectedProduct.Image_One = Images[0].Url_Image;
+                                break;
+
+                            case 2:
+                                selectedProduct.Id_Image_One = Images[0].Id_Image;
+                                selectedProduct.Image_One = Images[0].Url_Image;
+                                selectedProduct.Id_Image_Two = Images[1].Id_Image;
+                                selectedProduct.Image_Two = Images[1].Url_Image;
+                                break;
+
+                            case 3:
+                                selectedProduct.Id_Image_One = Images[0].Id_Image;
+                                selectedProduct.Image_One = Images[0].Url_Image;
+                                selectedProduct.Id_Image_Two = Images[1].Id_Image;
+                                selectedProduct.Image_Two = Images[1].Url_Image;
+                                selectedProduct.Id_Image_Three = Images[2].Id_Image;
+                                selectedProduct.Image_Three = Images[2].Url_Image;
+                                break;
+
+                            case > 3:
+                                selectedProduct.Id_Image_One = Images[0].Id_Image;
+                                selectedProduct.Image_One = Images[0].Url_Image;
+                                selectedProduct.Id_Image_Two = Images[1].Id_Image;
+                                selectedProduct.Image_Two = Images[1].Url_Image;
+                                selectedProduct.Id_Image_Three = Images[2].Id_Image;
+                                selectedProduct.Image_Three = Images[2].Url_Image;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
 
             return View(selectedProduct);
@@ -181,6 +239,9 @@ namespace BeviSano.Controllers
         public async Task<IActionResult> SaveEdit(Guid id, EditProduct editedProduct)
         {
             editedProduct.Id_Product = id;
+            editedProduct.Id_Image_One = (Guid?)TempData["Id_Image_One"];
+            editedProduct.Id_Image_Two = (Guid?)TempData["Id_Image_Two"];
+            editedProduct.Id_Image_Three = (Guid?)TempData["Id_Image_Three"];
 
             if (!ModelState.IsValid)
             {
@@ -211,7 +272,85 @@ namespace BeviSano.Controllers
                     command.Parameters.AddWithValue("@cover", editedProduct.Cover_Product);
                     command.Parameters.AddWithValue("@idCategory", editedProduct.Id_Category);
 
-                    int righeInteressate = await command.ExecuteNonQueryAsync();
+                    int interestedRows = await command.ExecuteNonQueryAsync();
+                }
+
+                List<Image> Images = new List<Image>();
+
+                if (editedProduct.Image_One != null && editedProduct.Image_One != "")
+                {
+                    Images.Add(
+                        new Image()
+                        {
+                            Url_Image = editedProduct.Image_One,
+                            Id_Image =
+                                editedProduct.Id_Image_One != null
+                                    ? editedProduct.Id_Image_One
+                                    : null,
+                        }
+                    );
+                }
+
+                if (editedProduct.Image_Two != null && editedProduct.Image_Two != "")
+                {
+                    Images.Add(
+                        new Image()
+                        {
+                            Url_Image = editedProduct.Image_Two,
+                            Id_Image =
+                                editedProduct.Id_Image_Two != null
+                                    ? editedProduct.Id_Image_Two
+                                    : null,
+                        }
+                    );
+                }
+
+                if (editedProduct.Image_Three != null && editedProduct.Image_Three != "")
+                {
+                    Images.Add(
+                        new Image()
+                        {
+                            Url_Image = editedProduct.Image_Three,
+                            Id_Image =
+                                editedProduct.Id_Image_Three != null
+                                    ? editedProduct.Id_Image_Three
+                                    : null,
+                        }
+                    );
+                }
+
+                foreach (var img in Images)
+                {
+                    string queryImgs;
+
+                    if (img.Id_Image == null)
+                    {
+                        queryImgs =
+                            "INSERT INTO Images VALUES (@Id_Image, @Id_Product, @Url_Image);";
+
+                        await using (SqlCommand command = new SqlCommand(queryImgs, connection))
+                        {
+                            command.Parameters.AddWithValue("@Id_Image", Guid.NewGuid());
+                            command.Parameters.AddWithValue("@Id_Product", id);
+                            command.Parameters.AddWithValue("@Url_Image", img.Url_Image);
+
+                            int interestedRows = await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                    else
+                    {
+                        queryImgs =
+                            "UPDATE Images SET Id_Product=@IdProduct, Url_Image=@UrlImage WHERE Id_Image=@idImage;";
+
+                        await using (SqlCommand command = new SqlCommand(queryImgs, connection))
+                        {
+                            command.Parameters.AddWithValue("@idImage", img.Id_Image);
+                            command.Parameters.AddWithValue("@IdProduct", id);
+                            command.Parameters.AddWithValue("@UrlImage", img.Url_Image);
+
+                            int interestedRows = await command.ExecuteNonQueryAsync();
+                        }
+                    }
                 }
             }
 
