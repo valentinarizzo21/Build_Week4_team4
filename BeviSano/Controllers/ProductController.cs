@@ -84,5 +84,46 @@ namespace BeviSano.Controllers
             }
             return View(product);
         }
+
+        public async Task<IActionResult> AddCart(Guid id)
+        {
+            await using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                string checkQuery = "SELECT * FROM Cart WHERE Cart.Id_Product = @id AND Id_Cart = @account_id";
+                await using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
+                {
+                    checkCommand.Parameters.AddWithValue("@id", id);
+                    checkCommand.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
+                    await using (SqlDataReader reader = await checkCommand.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            reader.Close();
+                            string updateQuery = "UPDATE Cart SET Quantity_Product = Quantity_Product + 1 WHERE Id_Product = @id AND Id_Cart = @account_id";
+                            await using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                            {
+                                updateCommand.Parameters.AddWithValue("@id", id);
+                                updateCommand.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
+                                await updateCommand.ExecuteNonQueryAsync();
+                            }
+                            return RedirectToAction("Index");
+                        }
+                        reader.Close();
+                    }
+                }
+
+                string query = "INSERT INTO Cart (Id_Cart, Date_Add, Quantity_Product, Id_Product) VALUES (@account_id, @date_now, @quantity, @id_product)";
+                await using (SqlCommand command = new SqlCommand(query, connection))
+                { 
+                    command.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
+                    command.Parameters.AddWithValue("@date_now", DateTime.Now);
+                    command.Parameters.AddWithValue("@quantity", 1);
+                    command.Parameters.AddWithValue("@id_product", id);
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

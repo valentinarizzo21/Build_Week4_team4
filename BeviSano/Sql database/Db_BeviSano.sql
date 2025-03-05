@@ -44,14 +44,14 @@ insert into Account (Name_Account, Email, Password_Account, Admin_Bit) VALUES
 ('Cobain', 'kurt.cobain@ciao.rip', 'CourtneyLove1994', 1);
 
 create table Cart(
-Id_Cart UNIQUEIDENTIFIER PRIMARY KEY,
+Id_Cart UNIQUEIDENTIFIER NOT NULL,
 Date_Add DATETIME DEFAULT GETDATE(),
 Quantity_Product INT NOT NULL DEFAULT 1,
-Id_Product UNIQUEIDENTIFIER,
+Id_Product UNIQUEIDENTIFIER NOT NULL,
 CONSTRAINT FK_Product_Cart FOREIGN KEY (Id_Product) REFERENCES Products(Id_Product),
 CONSTRAINT CK_Quantity_Product CHECK (Quantity_Product >= 1),
+CONSTRAINT PK_Cart PRIMARY KEY (Id_Cart, Id_Product)
 )
-
 
 INSERT INTO Categories (Title) VALUES
 ('Vino Bianco'),
