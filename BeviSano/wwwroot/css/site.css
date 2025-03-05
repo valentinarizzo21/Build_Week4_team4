@@ -106,10 +106,7 @@ hr:not([size]) {
     box-shadow: none !important;
 }
 
-
-
-
-.form-select {
+/*.form-select {
     border-color: #915b4a;
     color: #915b4a;
     width: 150px;
@@ -119,7 +116,7 @@ hr:not([size]) {
 .form-select:focus {
     border-color: #915b4a;
     box-shadow: transparent;
-}
+}*/
 
 .btnCart {
     width:40px;
@@ -129,4 +126,5 @@ hr:not([size]) {
     width:400px;
     height:400px;
 }
+
 
