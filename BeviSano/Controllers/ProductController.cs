@@ -60,7 +60,8 @@ namespace BeviSano.Controllers
             await using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT * FROM Products WHERE Id_Product = @id";
+                string query =
+                    "SELECT P.Id_Product, P.Name_Product, P.Price_Product, P.Description_Product, P.Stock_Product, P.Seller_Product, P.Sale_Product, P.Arrival_Date_Product, P.Id_Category, P.Cover_Product, C.Title FROM Products as P  INNER JOIN Categories as C ON P.Id_Category = C.Id_Category  WHERE P.Id_Product = @id;";
                 await using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
@@ -76,8 +77,45 @@ namespace BeviSano.Controllers
                             product.Seller_Product = reader.GetString(5);
                             product.Sale_Product = reader.GetDecimal(6);
                             product.Arrival_Date_Product = reader.GetInt32(7);
-                            product.Cover_Product = reader.GetString(8);
-                            product.Id_Category = reader.GetInt32(9);
+                            product.Id_Category = reader.GetInt32(8);
+                            product.Cover_Product = reader.GetString(9);
+                            product.Category_Name = reader.GetString(10);
+                        }
+                    }
+                }
+
+                string queryImgs = "SELECT Url_Image FROM Images WHERE Id_Product = @IdProduct;";
+                await using (SqlCommand commandImgs = new SqlCommand(queryImgs, connection))
+                {
+                    commandImgs.Parameters.AddWithValue("@IdProduct", id);
+                    await using (SqlDataReader reader = await commandImgs.ExecuteReaderAsync())
+                    {
+                        List<string> ImgsUrls = new List<string>();
+
+                        while (await reader.ReadAsync())
+                        {
+                            ImgsUrls.Add(reader.GetString(0));
+                        }
+
+                        switch (ImgsUrls.Count)
+                        {
+                            case 1:
+                                product.Url_Img_One = ImgsUrls[0];
+                                break;
+
+                            case 2:
+                                product.Url_Img_One = ImgsUrls[0];
+                                product.Url_Img_Two = ImgsUrls[1];
+                                break;
+
+                            case 3:
+                                product.Url_Img_One = ImgsUrls[0];
+                                product.Url_Img_Two = ImgsUrls[1];
+                                product.Url_Img_Three = ImgsUrls[2];
+                                break;
+
+                            default:
+                                break;
                         }
                     }
                 }
@@ -90,6 +128,7 @@ namespace BeviSano.Controllers
             await using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
+
 
                 string checkStockQuery = "SELECT Stock_Product FROM Products WHERE Id_Product = @id";
                 int stock = 0;
@@ -128,20 +167,30 @@ namespace BeviSano.Controllers
                 }
 
                 string checkQuery = "SELECT * FROM Cart WHERE Cart.Id_Product = @id AND Id_Cart = @account_id";
+
                 await using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
                 {
                     checkCommand.Parameters.AddWithValue("@id", id);
-                    checkCommand.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
+                    checkCommand.Parameters.AddWithValue(
+                        "@account_id",
+                        HomeController.MainAccount.Id
+                    );
                     await using (SqlDataReader reader = await checkCommand.ExecuteReaderAsync())
                     {
                         if (await reader.ReadAsync())
                         {
                             reader.Close();
-                            string updateQuery = "UPDATE Cart SET Quantity_Product = Quantity_Product + 1 WHERE Id_Product = @id AND Id_Cart = @account_id";
-                            await using (SqlCommand updateCommand = new SqlCommand(updateQuery, connection))
+                            string updateQuery =
+                                "UPDATE Cart SET Quantity_Product = Quantity_Product + 1 WHERE Id_Product = @id AND Id_Cart = @account_id";
+                            await using (
+                                SqlCommand updateCommand = new SqlCommand(updateQuery, connection)
+                            )
                             {
                                 updateCommand.Parameters.AddWithValue("@id", id);
-                                updateCommand.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
+                                updateCommand.Parameters.AddWithValue(
+                                    "@account_id",
+                                    HomeController.MainAccount.Id
+                                );
                                 await updateCommand.ExecuteNonQueryAsync();
                             }
                             return RedirectToAction("Index");
@@ -150,9 +199,10 @@ namespace BeviSano.Controllers
                     }
                 }
 
-                string query = "INSERT INTO Cart (Id_Cart, Date_Add, Quantity_Product, Id_Product) VALUES (@account_id, @date_now, @quantity, @id_product)";
+                string query =
+                    "INSERT INTO Cart (Id_Cart, Date_Add, Quantity_Product, Id_Product) VALUES (@account_id, @date_now, @quantity, @id_product)";
                 await using (SqlCommand command = new SqlCommand(query, connection))
-                { 
+                {
                     command.Parameters.AddWithValue("@account_id", HomeController.MainAccount.Id);
                     command.Parameters.AddWithValue("@date_now", DateTime.Now);
                     command.Parameters.AddWithValue("@quantity", 1);

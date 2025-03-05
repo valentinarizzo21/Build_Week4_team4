@@ -53,19 +53,19 @@
 
                 @* Immagini opzionali *@
                 <div class="form-group mb-3">
-                    <label for="imageOne" class="form-label" asp-for="Image_One"></label>
+                    <label for="imageOne" class="form-label h5 fw-normal m-3 ms-1" asp-for="Image_One"></label>
                     <input type="text" class="form-control form-control-lg" id="imageOne" asp-for="Image_One" />
                     <span class="text-danger" asp-validation-for="Image_One"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="imageTwo" class="form-label" asp-for="Image_Two"></label>
+                    <label for="imageTwo" class="form-label h5 fw-normal m-3 ms-1" asp-for="Image_Two"></label>
                     <input type="text" class="form-control form-control-lg" id="imageTwo" asp-for="Image_Two" />
                     <span class="text-danger" asp-validation-for="Image_Two"></span>
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="ImaheThree" class="form-label" asp-for="Image_Three"></label>
+                    <label for="ImaheThree" class="form-label h5 fw-normal m-3 ms-1" asp-for="Image_Three"></label>
                     <input type="text" class="form-control form-control-lg" id="ImaheThree" asp-for="Image_Three" />
                     <span class="text-danger" asp-validation-for="Image_Three"></span>
                 </div>
@@ -101,7 +101,7 @@
 
                         @* Categoria *@
                         <div class="form-group mb-3 w-50">
-                            <label for="Id_Category" class="form-label" asp-for="Id_Category"></label>
+                            <label for="Id_Category" class="form-label h5 fw-normal m-3 ms-1" asp-for="Id_Category"></label>
                             <select class="form-select p-2" asp-for="Id_Category">
                                 <option value="-1">-- seleziona una categoria --</option>
                                 @foreach (var category in categories.Categories)

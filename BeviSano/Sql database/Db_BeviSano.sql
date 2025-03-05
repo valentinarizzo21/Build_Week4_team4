@@ -53,6 +53,8 @@ CONSTRAINT CK_Quantity_Product CHECK (Quantity_Product >= 1),
 CONSTRAINT PK_Cart PRIMARY KEY (Id_Cart, Id_Product)
 )
 
+select * from Cart
+
 INSERT INTO Categories (Title) VALUES
 ('Vino Bianco'),
 ('Vino Rosso'),

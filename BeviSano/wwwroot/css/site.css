@@ -106,10 +106,7 @@ hr:not([size]) {
     box-shadow: none !important;
 }
 
-
-
-
-.form-select {
+/*.form-select {
     border-color: #915b4a;
     color: #915b4a;
     width: 150px;
@@ -119,14 +116,21 @@ hr:not([size]) {
 .form-select:focus {
     border-color: #915b4a;
     box-shadow: transparent;
-}
+}*/
 
 .btnCart {
     width:40px;
 }
 
-.carousel-mood {
-    width:400px;
-    height:400px;
+.title-absolute {
+    z-index:100;
+    top:200px;
+    left:200px;
 }
+.p-0 {
+    padding: 0 !important;
+}
+
+
+
 
