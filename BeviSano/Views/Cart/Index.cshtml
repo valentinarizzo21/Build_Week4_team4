@@ -1,0 +1,47 @@
+﻿@model ProductListCart
+@{
+	TempData["Title"] = "Carrello";
+	decimal totalCart = 0;
+}
+<div>
+	<table class="table table-striped table-hover border">
+		<thead>
+			<tr class="border">
+				<th>Prodotto</th>
+				<th>Nome</th>
+				<th>Data di Arrivo</th>
+				<th>Quantità</th>
+				<th>Prezzo</th>
+				<th>Sconto applicato</th>
+				<th>Azioni</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (Model.Products != null && Model.Products.Count > 0)
+			{
+				foreach (var product in Model.Products)
+				{
+					var arrivalDate = DateTime.Today.AddDays(product.Arrival_Date_Product);
+					decimal totalProduct = 0;
+					totalProduct += product.Price_Product * product.Quantity_Product;
+					totalCart += product.Price_Product * product.Quantity_Product;
+					<tr class="border">
+						<td>
+							<img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:100px" />
+						</td>
+						<td>@product.Name_Product</td>
+						<td>@arrivalDate.ToString("dd/MM/yyyy")</td>
+						<td>@product.Quantity_Product</td>
+						<td>@totalProduct.ToString("0.00")€</td>
+						<td>@product.Sale_Product.ToString("0")</td>
+						<td>
+							<a class="btn btn-danger" asp-controller="Cart" asp-action="Delete" asp-route-id=@product.Id_Product>Delete</a>
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+	<p>Non ci sono prodotti nel carrello</p>
+	<p>Totale nel carello: @totalCart.ToString("0.00")€</p>
+</div>
