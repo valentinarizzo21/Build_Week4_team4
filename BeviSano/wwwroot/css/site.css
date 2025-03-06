@@ -263,3 +263,11 @@ hr:not([size]) {
 .progress-text {
     font-size: 0.9rem;
 }
+
+
+/*Details Page*/
+.imgSmall {
+    max-height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+}
