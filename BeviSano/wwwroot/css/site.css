@@ -145,11 +145,121 @@ hr:not([size]) {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    .hover_effect:hover {
-        background-color: white;
-        color: #5c4d4d;
-    }
+.hover_effect:hover {
+    background-color: white;
+    color: #5c4d4d;
+}
 
-    .hover_effect .bi-search {
-        color: inherit;
-    }
+.hover_effect .bi-search {
+    color: inherit;
+}
+
+.benefits-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2d3e50;
+}
+
+.highlight {
+    color: #915b4a;
+}
+
+.benefits-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.benefit-item:last-child {
+    border-bottom: none;
+}
+
+.benefit-icon {
+    font-size: 2rem;
+    color: #5c4d4d;
+    margin-right: 20px;
+}
+
+.benefit-description h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3e50;
+    margin-bottom: 10px;
+}
+
+.benefit-description p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #555;
+}
+
+.benefit-item:hover {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+}
+
+.fidelity_card .card {
+    background: linear-gradient(135deg, #5c4d4d, #915b4a);
+    border-radius: 15px;
+    width: 500px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.fidelity_card .card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.fidelity_card .card-name {
+    color: #ffcd38;
+}
+
+.fidelity_card .card-body {
+    padding: 2rem;
+}
+
+.fidelity_card .card_header_annulla{
+    border-bottom: none !important;
+    background-color: transparent !important;
+}
+
+.progress-bar-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #ddd;
+    height: 8px;
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+}
+
+.progress {
+    background-color: #ffcd38;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+}
