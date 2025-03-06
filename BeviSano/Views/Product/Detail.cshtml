@@ -9,30 +9,39 @@
     <div class="row justify-content-between">
 
         <div class="col-md-7">
-            <div class="row">
-                <div class="col-6 p-0">
-                    <div><img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product"></div>
-                    <div>
-                        @if (Model.Url_Img_One != null)
-                        {
+            <div class="row pt-3">
+                <div class="col-3 d-flex flex-column gap-2">
+                    <div class="imgSmall">
+                        <img src="@Model.Cover_Product" class="img-fluid border border-3" style="border-color: #f2f1e7 !important; " alt="@Model.Name_Product">
+                    </div>
+
+                    @if (Model.Url_Img_One != null)
+                    {
+                        <div class="imgSmall">
                             <img src="@Model.Url_Img_One" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product">
-                        }
-                    </div>
-                </div>
-                <div class="col-6 p-0">
-                    <div>
-                        @if (Model.Url_Img_Two != null)
-                        {
+                        </div>
+                    }
+
+                    @if (Model.Url_Img_Two != null)
+                    {
+                        <div class="imgSmall">
                             <img src="@Model.Url_Img_Two" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product">
-                        }
-                    </div>
-                    <div>
-                        @if (Model.Url_Img_Three != null)
-                        {
+                        </div>
+                    }
+
+                    @if (Model.Url_Img_Three != null)
+                    {
+                        <div class="imgSmall">
                             <img src="@Model.Url_Img_Three" class="img-fluid border border-3" style="border-color: #f2f1e7 !important ; " alt="@Model.Name_Product">
-                        }
+                        </div>
+                    }
+                </div>
+                <div class="col-7">
+                    <div class="d-flex justify-content-center align-items-center w-100 bg_form_complete" style="height: 400px">
+                        <img src="@Model.Cover_Product" class="img-fluid w-100" id="bigImg" style="border-color: #f2f1e7 !important; max-height: 400px;" alt="@Model.Name_Product" />
                     </div>
                 </div>
+                <div class="col-2"></div>
             </div>
         </div>
         <div class="col-md-5">
@@ -47,7 +56,23 @@
                         <p style="color: #5c4d4d;">@Model.Seller_Product</p>
                     </div>
                     <div class="col-5">
-                        <h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4>
+
+                        @if (Model.Sale_Product > 0)
+                        {
+                            var discountedPrice = Model.Price_Product - (Model.Price_Product * Model.Sale_Product / 100);
+                            <p class="h6 fw-medium">
+                                <span style="color: #915b4a;">Sconto: -@Model.Sale_Product%</span> <br>
+                                <span class="text-muted text-decoration-line-through">@Model.Price_Product.ToString("0.00") €</span>
+                                <i class="bi bi-arrow-right"></i> <span class="h5" style="color: #a96851;">@discountedPrice.ToString("0.00") €</span>
+                            </p>
+                        }
+                        else
+                        {
+                            <h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4>
+                        }
+
+
+                        @* <h4 class="text-end" style="color: #a96851;">@Model.Price_Product.ToString("0.00")€</h4> *@
                     </div>
                 </div>
                 <hr style="border-color: #915b4a;" />
@@ -57,6 +82,15 @@
 
                 <form method="post" asp-controller="Product" asp-action="AddCartDetail" asp-route-id=@Model.Id_Product>
                     <div class="row mt-3">
+                        <div class="d-flex justify-content-end">
+                            <p class="text-end fw-bold">
+                                Quantità:
+                                <span style="background-color: rgba(145, 91, 74, 0.2); color: #915b4a; padding: 5px 12px; border-radius: 12px; font-weight: bold; display: inline-block;">
+                                    @Model.Stock_Product
+                                </span>
+                            </p>
+                        </div>
+
                         <div class="d-flex justify-content-end align-items-center mx-0 px-0">
                             <select class="form-select" aria-label="Seleziona quantità" id="quantitySelect">
                                 <option>Quantità</option>
@@ -118,4 +152,6 @@
             document.getElementById('quantityInput').value = selectedQuantity;
         });
     </script>
+
+    <script src="~/js/Product/Detail.js"></script>
 }

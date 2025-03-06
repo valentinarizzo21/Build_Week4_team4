@@ -1,6 +1,8 @@
 ﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Registrati";
+    var EmailError = TempData["EmailError"] as string;
+    var RegisterError = TempData["RegisterError"] as string;
 }
 
 <div class="d-flex justify-content-center align-items-center mt-5">
@@ -31,6 +33,8 @@
                 <a class="btn text-white w-50" href="/#login" style="background-color: #915b4a; border-color: #915b4a;">Accedi</a>
             </div>
         </form>
+        <p class="text-danger">@EmailError</p>
+        <p class="text-danger">@RegisterError</p>
     </div>
 
 </div>

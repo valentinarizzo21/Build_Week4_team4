@@ -1,6 +1,6 @@
 ﻿@model ProductListCart
 @{
-	TempData["Title"] = "Carrello";
+	ViewData["Title"] = "Carrello";
 	decimal totalCart = 0;
 	DateTime maxArrivalDate = DateTime.Today;
 }
@@ -144,7 +144,7 @@
 			}
 
 			<div class="mt-4 d-flex justify-content-center">
-				<a class="btn text-white me-3 px-4 py-2" asp-controller="" asp-action=""
+				<a class="btn text-white me-3 px-4 py-2" asp-controller="Product" asp-action="Index"
 				   style="background-color: #5c4d4d; border-color: #5c4d4d;"> Continua lo Shopping
 				</a>
 
