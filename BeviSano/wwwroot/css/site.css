@@ -33,27 +33,27 @@ hr:not([size]) {
     position: relative;
 }
 
-.hover-opacity:hover {
-    color: #ffcc00;
-    transform: scale(1.1);
-}
+    .hover-opacity:hover {
+        color: #ffcc00;
+        transform: scale(1.1);
+    }
 
-.hover-opacity::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 1px;
-    background: white;
-    transition: width 0.3s ease-in-out;
-    position: absolute;
-    left: 50%;
-    bottom: -3px;
-    transform: translateX(-50%);
-}
+    .hover-opacity::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 1px;
+        background: white;
+        transition: width 0.3s ease-in-out;
+        position: absolute;
+        left: 50%;
+        bottom: -3px;
+        transform: translateX(-50%);
+    }
 
-.hover-opacity:hover::after {
-    width: 100%;
-}
+    .hover-opacity:hover::after {
+        width: 100%;
+    }
 
 /*card*/
 
@@ -98,6 +98,7 @@ hr:not([size]) {
     border: 1px solid #915b4a !important;
     box-shadow: none !important;
 }
+
 .form-select {
     background: #f2f1e7 !important;
     border: 1px solid #ced4da !important;
@@ -125,18 +126,30 @@ hr:not([size]) {
 }*/
 
 .btnCart {
-    width:40px;
+    width: 40px;
 }
 
 .title-absolute {
-    z-index:100;
-    top:200px;
-    left:200px;
+    z-index: 100;
+    top: 200px;
+    left: 200px;
 }
+
 .p-0 {
     padding: 0 !important;
 }
 
+.hover_effect {
+    background-color: #5c4d4d;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
 
+    .hover_effect:hover {
+        background-color: white;
+        color: #5c4d4d;
+    }
 
-
+    .hover_effect .bi-search {
+        color: inherit;
+    }
