@@ -39,7 +39,6 @@ Admin_Bit BIT DEFAULT 0,
 Fidelity_Card BIT DEFAULT 0,
 )
 
-
 create table Cart(
 Id_Cart UNIQUEIDENTIFIER NOT NULL,
 Date_Add DATETIME DEFAULT GETDATE(),
@@ -49,8 +48,6 @@ CONSTRAINT FK_Product_Cart FOREIGN KEY (Id_Product) REFERENCES Products(Id_Produ
 CONSTRAINT CK_Quantity_Product CHECK (Quantity_Product >= 1),
 CONSTRAINT PK_Cart PRIMARY KEY (Id_Cart, Id_Product)
 )
-
-select * from Cart
 
 insert into Account (Name_Account, Email, Password_Account, Admin_Bit) VALUES
 ('Cobain', 'kurt.cobain@ciao.rip', 'CourtneyLove1994', 1),
@@ -64,8 +61,6 @@ INSERT INTO Categories (Title) VALUES
 ('Vodka'),
 ('Wiskey'),
 ('Gin');
-
-select * from categories
 
 INSERT INTO Products (Name_Product, Price_Product, Description_Product, Stock_Product, Seller_Product, Sale_Product, Arrival_Date_Product, Cover_Product, Id_Category)
 VALUES
@@ -89,12 +84,6 @@ VALUES
 ('Cointreau', 28.00, 'Liquore francese all�arancia, ideale per cocktails come Cosmopolitan o Margarita.', 19, 'Cointreau', 10, 3, 'https://www.carrefour.it/on/demandware.static/-/Sites-carrefour-master-catalog-IT/default/dwb27f44a8/large/COINTREAUGR40-3035542004206-1.png', 4),
 ('Bourbon Woodford Reserve', 55.00, 'Bourbon americano di alta classe, dal gusto ricco e morbido con note di vaniglia e caramello.', 14, 'Woodford Reserve', 15, 5, 'https://www.superbar.it/958-thickbox_default/woodford-reserve-kentucky-straight-bourbon-whiskey.jpg', 6),
 ('Gin Mare', 27.90, 'Gin Mare � un gin premium spagnolo che cattura l''essenza del Mediterraneo.', 3, 'Woodford Reserve', 0, 3, 'https://www.enotecacorsi.it/wp-content/uploads/GIN-MARE.png', 7);
-
-select * from Images
-
-delete from Images
-
-delete from Products
 
 insert into Images (Id_Product , Url_Image) values
 ((select Id_Product from Products where Name_Product = 'Barolo DOCG') , 'https://i.ebayimg.com/images/g/9KAAAOSwwX5nm7px/s-l1200.jpg'),
