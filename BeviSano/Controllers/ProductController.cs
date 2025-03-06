@@ -32,7 +32,7 @@ namespace BeviSano.Controllers
                     {
                         while (await reader.ReadAsync())
                         {
-                            var product = new Product
+                            var product = new Product()
                             {
                                 Id_Product = reader.GetGuid(0),
                                 Name_Product = reader.GetString(1),
@@ -49,12 +49,36 @@ namespace BeviSano.Controllers
                         }
                     }
                 }
+
+                string queryCategory = "SELECT * FROM Categories";
+                await using (SqlCommand commandCategory = new SqlCommand(queryCategory, connection))
+                {
+                    await using (SqlDataReader reader = await commandCategory.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var category = new Category()
+                            {
+                                Id_Category = reader.GetInt32(0),
+                                Title = reader.GetString(1)
+                            };
+                            Products.Categories.Add(category);
+                        }
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                Products.Products = Products.Products
+                    .Where(p => p.Name_Product.ToLower().Contains(searchQuery.ToLower()))
+                    .ToList();
             }
 
             return View(Products);
         }
 
-        [HttpPost("/Search")]
+        [HttpPost]
         public IActionResult UpdateVariable(string newValue)
         {
             searchQuery = newValue;

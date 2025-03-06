@@ -1,227 +1,112 @@
 ﻿@model StoreList
 @using BeviSano.Controllers
 @{
-    ViewData["Title"] = "BeviSano";
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var id = TempData["idProduct"] as Guid?;
-    var searchQuery = ProductController.searchQuery;
+	ViewData["Title"] = "BeviSano";
+	var errorMessage = TempData["ErrorMessage"] as string;
+	var id = TempData["idProduct"] as Guid?;
 }
 
 <h1 class="text-center my-4" style="color: #915b4a">Prodotti</h1>
 <div class="container">
 
-<div class="row g-2 mb-4">
-        <div class="col-12 col-md-6">
-            <div class="input-group">
-                <a class="input-group-text hover_effect" href="Product" id="searchBtn">
-                    <i class="bi bi-search"></i>
-                </a>
-                <input type="text" id="searchInput" class="form-control bg_form_complete" placeholder="Cerca prodotto..." onkeyup="filterProducts()">
-            </div>
-        </div>
-        <div class="col-12 col-md-6">
-            <select id="categoryFilter" class="form-select" onchange="filterProducts()">
-                <option value="" class="W-25">Tutte le categorie</option>
-                @* @foreach (var category in Model.Pr)
-                {
-                    <option value="@category.Id">@category.Name</option>
-                } *@
-            </select>
-        </div>
-    </div>
+	<div class="row g-2 mb-4">
+		<div class="col-12 col-md-6">
+			<form class="input-group" method="post" asp-controller="Product" asp-action="UpdateVariable">
+					<button submit class="input-group-text hover_effect" id="searchBtn">
+						<i class="bi bi-search"></i>
+					</button>
+					<input type="text" name="newValue" id="searchInput" class="form-control bg_form_complete" placeholder="Cerca prodotto...">
+			</form>
+		</div>
+		<div class="col-12 col-md-6">
+			<select id="categoryFilter" class="form-select">
+				<option value="" class="W-25">Tutte le categorie</option>
+				@foreach (var category in Model.Categories)
+				{
+					<option class="option" value="@category.Id_Category">@category.Title</option>
+				}
+			</select>
+		</div>
+	</div>
 
-    <div class="row g-3 justify-content-start">
-        @foreach (var item in Model.Products)
-        {
-            @if (string.IsNullOrEmpty(ProductController.searchQuery) || string.IsNullOrWhiteSpace(ProductController.searchQuery))
-            {
-               <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
-                <div class="card shadow-lg border-1 w-100 overflow-hidden position-relative d-flex flex-column justify-content-between m-1"
-                    style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color: rgba(169,104,81, 0.2); border-radius: 0.5rem; min-height: 700px;">
+	<div class="row g-3 justify-content-start">
+		@foreach (var item in Model.Products)
+		{
+				<div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+					<div class="card shadow-lg border-1 w-100 overflow-hidden position-relative d-flex flex-column justify-content-between m-1"
+						 style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color: rgba(169,104,81, 0.2); border-radius: 0.5rem; min-height: 700px;">
 
-                    <div class="position-relative w-100 overflow-hidden" style="height: 400px;">
-                        <img src="@item.Cover_Product" class="w-100 h-100 position-absolute top-0 start-0" alt="ImageProduct"
-                            style="object-fit: cover;">
-                    </div>
+						<div class="position-relative w-100 overflow-hidden" style="height: 400px;">
+							<img src="@item.Cover_Product" class="w-100 h-100 position-absolute top-0 start-0" alt="ImageProduct"
+								 style="object-fit: cover;">
+						</div>
 
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title fw-medium" style="color: #5c4d4d; min-height: 30px;">@item.Name_Product</h5>
-                        <p class="card-text m-0" style="color: #915b4a; min-height: 60px; overflow: hidden; text-overflow: ellipsis;">
-                            @item.Description_Product
-                        </p>
-                        <p class="text-end fw-bold">Quantità:
-                            <span style="background-color: rgba(145, 91, 74, 0.2); color: #915b4a; padding: 5px 12px; border-radius: 12px; font-weight: bold; display: inline-block;">
-                                @item.Stock_Product
-                            </span>
-                        </p>
-                        <div class="text-center d-flex align-items-center justify-content-start" style="min-height: 50px;">
-                            @if (item.Sale_Product > 0)
-                            {
-                                var discountedPrice = item.Price_Product - (item.Price_Product * item.Sale_Product / 100);
-                                <p class="h6 fw-medium">
-                                    <span style="color: #915b4a;">Sconto: -@item.Sale_Product%</span> <br>
-                                    <span class="text-muted text-decoration-line-through">@item.Price_Product.ToString("0.00") €</span>
-                                    <i class="bi bi-arrow-right"></i> <span style="color: #5c4d4d;">@discountedPrice.ToString("0.00") €</span>
-                                </p>
-                            }
-                            else
-                            {
-                                <p class="h6 fw-medium" style="color: #5c4d4d;">@item.Price_Product.ToString("0.00") €</p>
-                            }
-                        </div>
-                        <div class="d-flex justify-content-between mt-3">
-                            @if (HomeController.MainAccount != null)
-                            {
-                                <a asp-controller="Product" asp-action="AddCart" asp-route-id="@item.Id_Product"
-                                    class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a;">
-                                    + Carrello
-                                </a>
-                            }
-                            else
-                            {
-                                <button class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a; opacity: 30%"
-                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Devi effettuare il login per acquistare un prodotto">
-                                    + Carrello
-                                </button>
-                            }
-                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product"
-                                class="btn btn_home text-white" style="background-color: #915b4a; border-color: #915b4a;">
-                                Dettagli
-                            </a>
-                        </div>
-                    </div>
+						<div class="card-body d-flex flex-column justify-content-between">
+							<h5 class="card-title fw-medium" style="color: #5c4d4d; min-height: 30px;">@item.Name_Product</h5>
+							<p class="card-text m-0" style="color: #915b4a; min-height: 60px; overflow: hidden; text-overflow: ellipsis;">
+								@item.Description_Product
+							</p>
+							<p class="text-end fw-bold">
+								Quantità:
+								<span style="background-color: rgba(145, 91, 74, 0.2); color: #915b4a; padding: 5px 12px; border-radius: 12px; font-weight: bold; display: inline-block;">
+									@item.Stock_Product
+								</span>
+							</p>
+							<div class="text-center d-flex align-items-center justify-content-start" style="min-height: 50px;">
+								@if (item.Sale_Product > 0)
+								{
+									var discountedPrice = item.Price_Product - (item.Price_Product * item.Sale_Product / 100);
+									<p class="h6 fw-medium">
+										<span style="color: #915b4a;">Sconto: -@item.Sale_Product%</span> <br>
+										<span class="text-muted text-decoration-line-through">@item.Price_Product.ToString("0.00") €</span>
+										<i class="bi bi-arrow-right"></i> <span style="color: #5c4d4d;">@discountedPrice.ToString("0.00") €</span>
+									</p>
+								}
+								else
+								{
+									<p class="h6 fw-medium" style="color: #5c4d4d;">@item.Price_Product.ToString("0.00") €</p>
+								}
+							</div>
+							<div class="d-flex justify-content-between mt-3">
+								@if (HomeController.MainAccount != null)
+								{
+									<a asp-controller="Product" asp-action="AddCart" asp-route-id="@item.Id_Product"
+									   class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a;">
+										+ Carrello
+									</a>
+								}
+								else
+								{
+									<button class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a; opacity: 30%"
+											data-bs-toggle="tooltip" data-bs-placement="top"
+											title="Devi effettuare il login per acquistare un prodotto">
+										+ Carrello
+									</button>
+								}
+								<a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product"
+								   class="btn btn_home text-white" style="background-color: #915b4a; border-color: #915b4a;">
+									Dettagli
+								</a>
+							</div>
+						</div>
 
-                    @if (!string.IsNullOrEmpty(errorMessage) && item.Id_Product == id)
-                    {
-                        <p class="text-danger text-center">@errorMessage</p>
-                    }
-                </div>
-            </div>
-            }
-            else
-            {
-                if (item.Name_Product.Contains(ProductController.searchQuery))
-                {
-                    <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
-                <div class="card shadow-lg border-1 w-100 overflow-hidden position-relative d-flex flex-column justify-content-between m-1"
-                    style="background-color: rgba(172, 104, 81, 0.1); transition: transform 0.3s ease-in-out; border-color: rgba(169,104,81, 0.2); border-radius: 0.5rem; min-height: 700px;">
-
-                    <div class="position-relative w-100 overflow-hidden" style="height: 400px;">
-                        <img src="@item.Cover_Product" class="w-100 h-100 position-absolute top-0 start-0" alt="ImageProduct"
-                            style="object-fit: cover;">
-                    </div>
-
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h5 class="card-title fw-medium" style="color: #5c4d4d; min-height: 30px;">@item.Name_Product</h5>
-                        <p class="card-text m-0" style="color: #915b4a; min-height: 60px; overflow: hidden; text-overflow: ellipsis;">
-                            @item.Description_Product
-                        </p>
-                        <p class="text-end fw-bold">Quantità:
-                            <span style="background-color: rgba(145, 91, 74, 0.2); color: #915b4a; padding: 5px 12px; border-radius: 12px; font-weight: bold; display: inline-block;">
-                                @item.Stock_Product
-                            </span>
-                        </p>
-                        <div class="text-center d-flex align-items-center justify-content-start" style="min-height: 50px;">
-                            @if (item.Sale_Product > 0)
-                            {
-                                var discountedPrice = item.Price_Product - (item.Price_Product * item.Sale_Product / 100);
-                                <p class="h6 fw-medium">
-                                    <span style="color: #915b4a;">Sconto: -@item.Sale_Product%</span> <br>
-                                    <span class="text-muted text-decoration-line-through">@item.Price_Product.ToString("0.00") €</span>
-                                    <i class="bi bi-arrow-right"></i> <span style="color: #5c4d4d;">@discountedPrice.ToString("0.00") €</span>
-                                </p>
-                            }
-                            else
-                            {
-                                <p class="h6 fw-medium" style="color: #5c4d4d;">@item.Price_Product.ToString("0.00") €</p>
-                            }
-                        </div>
-                        <div class="d-flex justify-content-between mt-3">
-                            @if (HomeController.MainAccount != null)
-                            {
-                                <a asp-controller="Product" asp-action="AddCart" asp-route-id="@item.Id_Product"
-                                    class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a;">
-                                    + Carrello
-                                </a>
-                            }
-                            else
-                            {
-                                <button class="btn btn_home me-2" style="border-color: #915b4a; color: #915b4a; opacity: 30%"
-                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                    title="Devi effettuare il login per acquistare un prodotto">
-                                    + Carrello
-                                </button>
-                            }
-                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id_Product"
-                                class="btn btn_home text-white" style="background-color: #915b4a; border-color: #915b4a;">
-                                Dettagli
-                            </a>
-                        </div>
-                    </div>
-
-                    @if (!string.IsNullOrEmpty(errorMessage) && item.Id_Product == id)
-                    {
-                        <p class="text-danger text-center">@errorMessage</p>
-                    }
-                </div>
-            </div>
-                }
-            }
-        }
-    </div>
+						@if (!string.IsNullOrEmpty(errorMessage) && item.Id_Product == id)
+						{
+							<p class="text-danger text-center">@errorMessage</p>
+						}
+					</div>
+				</div>
+		}
+	</div>
 </div>
 
 @section Scripts
 {
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl)
-        {
-          return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        let search = document.getElementById("searchInput");
-
-        let searchBtn = document.getElementById("searchBtn");
-
-        searchBtn.addEventListener('click', () => {
-            updateVariable();
-        })
-
-            function updateVariable() {
-            var newValue = search.value;
-
-            // Verifica che ci sia un valore da inviare
-            if (newValue.trim() === "") {
-                alert("Inserisci un valore valido!");
-                return;
-            }
-
-            // Invia la richiesta AJAX al controller
-            $.ajax({
-                url: '@Url.Action("UpdateVariable", "Product")', // URL dell'azione controller
-                type: 'POST',
-                data: { newValue: newValue }, // Passiamo il nuovo valore al server
-                success: function(response) {
-                    if (response.success) {
-                        // Aggiorna il valore sulla pagina senza ricaricarla
-                        // console.log('valore aggiornato: ' + response.updatedValue);
-                        // console.log('valore attuale: ' + '@TempData["SearchQuery"]');
-
-                    } else {
-                        console.log("Errore nell'aggiornamento della variabile");
-                    }
-                },
-                error: function() {
-                    console.log('Errore durante la richiesta AJAX');
-                }
-            });
-        }
-
-    </script>
+	<script>
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl)
+		{
+		  return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+	</script>
 }
