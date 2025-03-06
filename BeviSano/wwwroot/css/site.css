@@ -264,6 +264,13 @@ hr:not([size]) {
     font-size: 0.9rem;
 }
 
+/*Details Page*/
+.imgSmall {
+    max-height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
 .exclusive-message, .exclusive_message {
     opacity: 0;
     transform: translateY(20px);
