@@ -115,4 +115,19 @@
 		  return new bootstrap.Tooltip(tooltipTriggerEl)
 		})
 	</script>
+
+		@* <script>
+			document.addEventListener("DOMContentLoaded", function () {
+				let searchInput = document.getElementById("searchInput");
+				let backButton = document.getElementById("backButton");
+
+				searchInput.addEventListener("input", function () {
+					if (searchInput.value.trim() !== "") {
+						backButton.style.display = "inline-block";
+					} else {
+						backButton.style.display = "none";
+					}
+				});
+			});
+		</script> *@
 }
