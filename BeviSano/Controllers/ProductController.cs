@@ -8,6 +8,7 @@ namespace BeviSano.Controllers
     {
         private readonly string _connectionString;
         public static string searchQuery = "";
+        public static int category = 0;
 
         public ProductController()
         {
@@ -25,27 +26,59 @@ namespace BeviSano.Controllers
             await using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "SELECT * FROM Products";
-                await using (SqlCommand command = new SqlCommand(query, connection))
+
+                if (category != 0)
                 {
-                    await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    string query = "SELECT * FROM Products WHERE Id_Category = @id";
+                    await using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        while (await reader.ReadAsync())
+                        command.Parameters.AddWithValue("@id", category);
+                        await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            var product = new Product()
+                            while (await reader.ReadAsync())
                             {
-                                Id_Product = reader.GetGuid(0),
-                                Name_Product = reader.GetString(1),
-                                Price_Product = reader.GetDecimal(2),
-                                Description_Product = reader.GetString(3),
-                                Stock_Product = reader.GetInt32(4),
-                                Seller_Product = reader.GetString(5),
-                                Sale_Product = reader.GetDecimal(6),
-                                Arrival_Date_Product = reader.GetInt32(7),
-                                Cover_Product = reader.GetString(8),
-                                Id_Category = reader.GetInt32(9),
-                            };
-                            Products.Products.Add(product);
+                                var product = new Product()
+                                {
+                                    Id_Product = reader.GetGuid(0),
+                                    Name_Product = reader.GetString(1),
+                                    Price_Product = reader.GetDecimal(2),
+                                    Description_Product = reader.GetString(3),
+                                    Stock_Product = reader.GetInt32(4),
+                                    Seller_Product = reader.GetString(5),
+                                    Sale_Product = reader.GetDecimal(6),
+                                    Arrival_Date_Product = reader.GetInt32(7),
+                                    Cover_Product = reader.GetString(8),
+                                    Id_Category = reader.GetInt32(9),
+                                };
+                                Products.Products.Add(product);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    string query = "SELECT * FROM Products";
+                    await using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var product = new Product()
+                                {
+                                    Id_Product = reader.GetGuid(0),
+                                    Name_Product = reader.GetString(1),
+                                    Price_Product = reader.GetDecimal(2),
+                                    Description_Product = reader.GetString(3),
+                                    Stock_Product = reader.GetInt32(4),
+                                    Seller_Product = reader.GetString(5),
+                                    Sale_Product = reader.GetDecimal(6),
+                                    Arrival_Date_Product = reader.GetInt32(7),
+                                    Cover_Product = reader.GetString(8),
+                                    Id_Category = reader.GetInt32(9),
+                                };
+                                Products.Products.Add(product);
+                            }
                         }
                     }
                 }
@@ -82,6 +115,14 @@ namespace BeviSano.Controllers
         public IActionResult UpdateVariable(string newValue)
         {
             searchQuery = newValue;
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult SelectCategory(int newCategory)
+        {
+            category = newCategory;
+            searchQuery = "";
             return RedirectToAction("Index");
         }
 
