@@ -353,3 +353,14 @@ hr:not([size]) {
 .privacy-policy a:hover {
     text-decoration: underline;
 }
+
+
+.dropdown_nav {
+    background-color: #5c4d4d !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #915b4a !important;
+    color: white !important; 
+}
