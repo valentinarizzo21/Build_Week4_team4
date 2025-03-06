@@ -18,15 +18,16 @@
 					<input type="text" name="newValue" id="searchInput" class="form-control bg_form_complete" placeholder="Cerca prodotto...">
 			</form>
 		</div>
-		<div class="col-12 col-md-6">
-			<select id="categoryFilter" class="form-select">
-				<option value="" class="W-25">Tutte le categorie</option>
+		<form class="col-12 col-md-6" method="post" asp-controller="Product" asp-action="SelectCategory">
+			<select id="categoryFilter" name="newCategory" class="form-select" onchange="this.form.submit()">
+				<option value="">---Selezione una categoria---</option>
+				<option value=0>Tutte le categorie</option>
 				@foreach (var category in Model.Categories)
 				{
-					<option class="option" value="@category.Id_Category">@category.Title</option>
+					<option class="option" value=@category.Id_Category>@category.Title</option>
 				}
 			</select>
-		</div>
+		</form>
 	</div>
 
 	<div class="row g-3 justify-content-start">

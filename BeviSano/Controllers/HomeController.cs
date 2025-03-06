@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using BeviSano.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -10,6 +11,8 @@ public class HomeController : Controller
     public static Account? MainAccount { get; set; }
 
     private readonly string _connectionString;
+
+    private Regex regex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
     public HomeController()
     {
@@ -68,6 +71,7 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
+            TempData["VoidLogin"] = "Compilare i campi per continuare!";
             return View("Index");
         }
         Account account = new Account();
@@ -98,6 +102,7 @@ public class HomeController : Controller
         }
         if (!accountFound)
         {
+            TempData["LoginError"] = "Email o password non corrette!";
             return View("index");
         }
         else
@@ -119,6 +124,12 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
+            TempData["VoidRegister"] = "Compilare i campi per continuare!";
+            return View("Register");
+        }
+        if (!regex.IsMatch(addAccount.Email)) 
+        {
+            TempData["EmailError"] = "Inserire un'indirizzo email valido!";
             return View("Register");
         }
         Account account = new Account();
@@ -134,6 +145,7 @@ public class HomeController : Controller
                 {
                     if (await reader.ReadAsync())
                     {
+                        TempData["RegisterError"] = "Email già registrata!";
                         return View("Register");
                     }
                 }
