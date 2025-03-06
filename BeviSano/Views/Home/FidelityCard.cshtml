@@ -4,20 +4,170 @@
     Account MainAccount = HomeController.MainAccount;
 }
 
-<h2>Fidelity Card</h2>
-@if (MainAccount != null)
-{
-    <h5>Ciao @MainAccount.Name</h5>
-}
-
 <div>
     @if (MainAccount == null)
     {
-        <p class="lead">Accedi o Registrati per vedere la tua card e ottenere magnifici sconti esclusivi!</p>
+        @* titolo *@
+        <div class="fidelity_page">
+        <div class="exclusive-message">
+            <h1>Entra nel club esclusivo!</h1>
+            <p class="lead">Accedi per sbloccare sconti irresistibili e vantaggi esclusivi.</p>
+        </div>
+
+        @* sconti *@
+                <div class="benefits-container">
+       <h2 class="benefits-title">Vantaggi esclusivi con la tua <span class="highlight">Fidelity Card BeviSano</span></h2>
+       <div class="benefits-list">
+          <div class="benefit-item">
+             <i class="bi bi-percent benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Sconto del 15% sul totale</h3>
+                <p>Approfitta subito del tuo sconto esclusivo del 15% su tutti gli acquisti nel nostro store!</p>
+             </div>
+          </div>
+          <div class="benefit-item">
+             <i class="bi bi-gift benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Omaggio di benvenuto</h3>
+                <p>Ricevi un regalo esclusivo per il tuo primo acquisto con la Fidelity Card.</p>
+             </div>
+          </div>
+          <div class="benefit-item">
+             <i class="bi bi-tags benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Promozioni esclusive</h3>
+                <p>Ricevi accesso a offerte e sconti speciali solo per i membri.</p>
+             </div>
+          </div>
+          <div class="benefit-item">
+             <i class="bi bi-award benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Punti fedeltà accumulabili</h3>
+                <p>Guadagna punti per ogni acquisto che effettui e ottieni sconti o premi speciali.</p>
+             </div>
+          </div>
+          <div class="benefit-item">
+             <i class="bi bi-calendar-check benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Eventi VIP e anteprime</h3>
+                <p>Partecipa a eventi esclusivi e ricevi in anteprima le novità.</p>
+             </div>
+          </div>
+          <div class="benefit-item">
+             <i class="bi bi-gear-wide-connected benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Personalizzazione delle offerte</h3>
+                <p>Ricevi offerte personalizzate in base ai tuoi acquisti precedenti.</p>
+             </div>
+          </div>
+          @* <div class="benefit-item">
+             <i class="bi bi-truck benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Spedizione gratuita su ordini superiori a 50€</h3>
+                <p>Spedizione gratuita per ordini superiori a 50€.</p>
+             </div>
+          </div> *@
+          <div class="benefit-item">
+             <i class="bi bi-box benefit-icon"></i>
+             <div class="benefit-description">
+                <h3>Accesso a prodotti limitati</h3>
+                <p>Scopri e acquista prodotti in edizione limitata riservati solo ai membri.</p>
+             </div>
+          </div>
+       </div>
+    </div>
+        </div>
+
     } else
     {
-        <div class="bg-secondary rounded-3 w-25 m-5 p-5">
-            <p>Nome: @MainAccount.Name</p>
+        @* titolo *@
+        <div class="fidelity_page">
+            <div class="exclusive_message">
+                <h1>Bevi Sano ti da il benvenuto nella tua sezione @MainAccount.Name!</h1>
+            </div>
+        @* card *@
+        <div class="fidelity_card">
+        <div class="card-container my-4 d-flex justify-content-center">
+            <div class="card d-flex flex-column text-white">
+                  <div class="card_header_annulla">
+                     <h2 class="card-title">Benvenuto, <span class="card-name">@MainAccount.Name</span></h2>
+                  </div>
+                  <div class="card-body m-0 p-0 my-3">
+                     <div class="progress-bar-container">
+                        <div class="progress-bar">
+                           <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <p class="progress-text text-center my-2">75% al prossimo premio!</p>
+                     </div>
+                  </div>
+                  <div class="card_header_annulla align-self-end">
+                         <img src="~/lib/img/BarCode_logo.png" style="height: 70px; width: 140px"/>
+                  </div>
+           </div>
         </div>
+            </div>
+        @* sconti *@
+        <div class="benefits-container">
+           <h2 class="benefits-title">Vantaggi esclusivi con la tua <span class="highlight">Fidelity Card BeviSano</span></h2>
+               <div class="benefits-list">
+                  <div class="benefit-item">
+                     <i class="bi bi-percent benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Sconto del 15% sul totale</h3>
+                        <p>Approfitta subito del tuo sconto esclusivo del 15% su tutti gli acquisti nel nostro store!</p>
+                     </div>
+                  </div>
+                  <div class="benefit-item">
+                     <i class="bi bi-gift benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Omaggio di benvenuto</h3>
+                        <p>Ricevi un regalo esclusivo per il tuo primo acquisto con la Fidelity Card.</p>
+                     </div>
+                  </div>
+                  <div class="benefit-item">
+                     <i class="bi bi-tags benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Promozioni esclusive</h3>
+                        <p>Ricevi accesso a offerte e sconti speciali solo per i membri.</p>
+                     </div>
+                  </div>
+                  <div class="benefit-item">
+                     <i class="bi bi-award benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Punti fedeltà accumulabili</h3>
+                        <p>Guadagna punti per ogni acquisto che effettui e ottieni sconti o premi speciali.</p>
+                     </div>
+                  </div>
+                  <div class="benefit-item">
+                     <i class="bi bi-calendar-check benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Eventi VIP e anteprime</h3>
+                        <p>Partecipa a eventi esclusivi e ricevi in anteprima le novità.</p>
+                     </div>
+                  </div>
+                  <div class="benefit-item">
+                     <i class="bi bi-gear-wide-connected benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Personalizzazione delle offerte</h3>
+                        <p>Ricevi offerte personalizzate in base ai tuoi acquisti precedenti.</p>
+                     </div>
+                  </div>
+              @* <div class="benefit-item">
+                 <i class="bi bi-truck benefit-icon"></i>
+                 <div class="benefit-description">
+                    <h3>Spedizione gratuita su ordini superiori a 50€</h3>
+                    <p>Spedizione gratuita per ordini superiori a 50€.</p>
+                 </div>
+              </div> *@
+                  <div class="benefit-item">
+                     <i class="bi bi-box benefit-icon"></i>
+                     <div class="benefit-description">
+                        <h3>Accesso a prodotti limitati</h3>
+                        <p>Scopri e acquista prodotti in edizione limitata riservati solo ai membri.</p>
+                     </div>
+                  </div>
+            </div>
+            </div>
+     </div>
     }
 </div>
