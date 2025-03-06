@@ -33,13 +33,12 @@ CONSTRAINT FK_Image_Product FOREIGN KEY (Id_Product) REFERENCES Products(Id_Prod
 create table  Account (
 Id_Account UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
 Name_Account NVARCHAR(20) NOT NULL,
-Email NVARCHAR(20) NOT NULL,
+Email NVARCHAR(20) UNIQUE NOT NULL,
 Password_Account NVARCHAR(20) NOT NULL,
 Admin_Bit BIT DEFAULT 0,
+Fidelity_Card BIT DEFAULT 0,
 )
 
-insert into Account (Name_Account, Email, Password_Account, Admin_Bit) VALUES
-('Cobain', 'kurt.cobain@ciao.rip', 'CourtneyLove1994', 1);
 
 create table Cart(
 Id_Cart UNIQUEIDENTIFIER NOT NULL,
@@ -52,6 +51,10 @@ CONSTRAINT PK_Cart PRIMARY KEY (Id_Cart, Id_Product)
 )
 
 select * from Cart
+
+insert into Account (Name_Account, Email, Password_Account, Admin_Bit) VALUES
+('Cobain', 'kurt.cobain@ciao.rip', 'CourtneyLove1994', 1),
+('sa', 'sa@ciao.com', 'sa', 1);
 
 INSERT INTO Categories (Title) VALUES
 ('Vino Bianco'),
@@ -87,6 +90,11 @@ VALUES
 ('Bourbon Woodford Reserve', 55.00, 'Bourbon americano di alta classe, dal gusto ricco e morbido con note di vaniglia e caramello.', 14, 'Woodford Reserve', 15, 5, 'https://www.superbar.it/958-thickbox_default/woodford-reserve-kentucky-straight-bourbon-whiskey.jpg', 6),
 ('Gin Mare', 27.90, 'Gin Mare � un gin premium spagnolo che cattura l''essenza del Mediterraneo.', 3, 'Woodford Reserve', 0, 3, 'https://www.enotecacorsi.it/wp-content/uploads/GIN-MARE.png', 7);
 
+select * from Images
+
+delete from Images
+
+delete from Products
 
 insert into Images (Id_Product , Url_Image) values
 ((select Id_Product from Products where Name_Product = 'Barolo DOCG') , 'https://i.ebayimg.com/images/g/9KAAAOSwwX5nm7px/s-l1200.jpg'),
