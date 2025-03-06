@@ -163,7 +163,7 @@ hr:not([size]) {
     margin: 0 auto;
 }
 
-.benefits-title {
+.benefits-title, .exclusive-message h1, .exclusive_message h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -203,7 +203,7 @@ hr:not([size]) {
     margin-bottom: 10px;
 }
 
-.benefit-description p {
+.benefit-description p, .exclusive-message p {
     font-size: 1.1rem;
     font-weight: 300;
     color: #555;
@@ -262,4 +262,22 @@ hr:not([size]) {
 
 .progress-text {
     font-size: 0.9rem;
+}
+
+.exclusive-message, .exclusive_message {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
