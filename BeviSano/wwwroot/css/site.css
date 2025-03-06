@@ -361,6 +361,6 @@ hr:not([size]) {
 }
 
 .dropdown-item:hover {
-    background-color: #915b4a !important;
+    background-color: transparent !important;
     color: white !important; 
 }
