@@ -94,6 +94,7 @@ public class HomeController : Controller
                         account.Email = reader.GetString(2);
                         account.Password = reader.GetString(3);
                         account.admin = reader.GetBoolean(4);
+                        account.fidelity = reader.GetBoolean(5);
 
                         accountFound = true;
                     }
@@ -127,7 +128,7 @@ public class HomeController : Controller
             TempData["VoidRegister"] = "Compilare i campi per continuare!";
             return View("Register");
         }
-        if (!regex.IsMatch(addAccount.Email)) 
+        if (!regex.IsMatch(addAccount.Email))
         {
             TempData["EmailError"] = "Inserire un'indirizzo email valido!";
             return View("Register");
@@ -177,6 +178,29 @@ public class HomeController : Controller
     public IActionResult FidelityCard()
     {
         return View();
+    }
+
+    public async Task<IActionResult> ActivateFidelity()
+    {
+        await using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            await connection.OpenAsync();
+            var query = "UPDATE Account SET Fidelity_Card=@bit WHERE Id_Account=@id";
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@bit", "1");
+                command.Parameters.AddWithValue("@id", MainAccount.Id);
+
+                int interestedRows = await command.ExecuteNonQueryAsync();
+                if (interestedRows > 0)
+                {
+                    MainAccount.fidelity = true;
+                }
+            }
+        }
+
+        return RedirectToAction("FidelityCard");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
