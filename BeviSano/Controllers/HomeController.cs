@@ -166,6 +166,7 @@ public class HomeController : Controller
                     account.Email = addAccount.Email;
                     account.Password = addAccount.Password;
                     account.admin = false;
+                    account.fidelity = false;
                 }
             }
         }
