@@ -76,10 +76,10 @@ public class HomeController : Controller
         {
             await connection.OpenAsync();
             string query =
-                "SELECT * FROM Account WHERE Name_Account = @name AND Password_Account = @password";
+                "SELECT * FROM Account WHERE Email = @email AND Password_Account = @password";
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@name", loginData.Name);
+                command.Parameters.AddWithValue("@email", loginData.Email);
                 command.Parameters.AddWithValue("@password", loginData.Password);
                 await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {

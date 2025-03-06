@@ -4,9 +4,9 @@ namespace BeviSano.Models
 {
     public class LoginViewModel
     {
-        [Display(Name = "Name")]
-        [Required(ErrorMessage = "Il nome è obbligatorio!")]
-        public string Name {  get; set; }
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "L'indirizzo email è obbligatorio!")]
+        public string Email {  get; set; }
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = "La password è obbligatoria!")]
