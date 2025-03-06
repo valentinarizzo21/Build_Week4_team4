@@ -3,5 +3,21 @@
 	TempData["Title"] = "Ordine Effettuato";
 }
 
-<h1>ORDINE EFFETTUATO CON SUCCESSO</h1>
-<a asp-controller="Product" asp-action="Index">Torna a fare acquisti</a>
+
+<div class="container text-center my-5">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <img src="~/lib/img/Bevi_Sano_Home.png" style="max-width:200px; max-height:200px;" class="img-fluid" />
+        </div>
+        <div class="col-md-8">
+            <h1 class="fw-bolder" style="color:#5c4d4d">Ordine Effettuato con Successo!</h1>
+            <p class="lead" style="color:#a96851">Grazie per aver scelto Bevi Sano! Il tuo ordine è stato ricevuto e sarà presto in lavorazione. Nel frattempo, rilassati e preparati a gustare i nostri prodotti freschi e sani.</p>
+            <p class="lead"style="color:#a96851">Se hai bisogno di ulteriori informazioni, non esitare a contattarci. Torna a trovarci quando vuoi, siamo sempre qui per te!</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-sm mt-3 me-2" style="background-color:#a96851; color:#f2f1e7" asp-controller="Product" asp-action="Index">Torna a fare acquisti</a>
+    </div>
+</div>
+
+
