@@ -1,4 +1,5 @@
 ﻿@model ProductListCart
+@using BeviSano.Controllers
 @{
 	ViewData["Title"] = "Carrello";
 	decimal totalCart = 0;
@@ -47,7 +48,7 @@
 								<td>
 									<img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:60px; border-radius: 4px;" />
 								</td>
-								<td class="fw-bold w-auto" style="color:#5c4d4d;">@product.Name_Product</td>
+								<td><a class="fw-bold w-auto" style="color:#5c4d4d;" asp-controller="Product" asp-action="Detail" asp-route-id=@product.Id_Product>@product.Name_Product</a></td>
 
 								<td class="w-auto">@product.Quantity_Product</td>
 								<td>
@@ -65,34 +66,20 @@
 										<p class="h6 fw-medium" style="color: #5c4d4d;">@product.Price_Product.ToString("0.00") €</p>
 									}
 								</td>
-
 								<td class="w-auto">
 									<a class="btn me-2 text-white" asp-controller="Cart" asp-action="Delete" asp-route-id=@product.Id_Product style="background-color: #915b4a; border-color: #915b4a;"><i class="bi bi-trash"></i> </a>
 								</td>
 							</tr>
-
-
 						}
 					</tbody>
 				</table>
-
-
-
-
 			}
 		</div>
-
-
-
-
-
-
-
 	</div>
 
 
 	<div class="p-4 rounded shadow-lg mt-3" style="background-color: #f2f1e7;">
-		
+
 
 		@if (Model.Products == null || Model.Products.Count == 0)
 		{
@@ -105,13 +92,38 @@
 				<span style="color:#5c4d4d;">@maxArrivalDate.ToString("dd/MM/yyyy")</span>
 			</div>
 
-			<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
-				<span class="fw-bold" style="color:#5c4d4d;">Sconto FidelityCard:</span>
-				<span style="color:#5c4d4d;">-</span>
-			</div>
+			if (HomeController.MainAccount.fidelity)
+			{
+				<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+					<span class="fw-bold" style="color:#5c4d4d;">Sconto FidelityCard:</span>
+					<span style="color:#5c4d4d;">-15% sul totale</span>
+				</div>
+			}
+			else
+			{
+				<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+					<span class="fw-bold" style="color:#5c4d4d;">Sconto FidelityCard:</span>
+					<span style="color:#5c4d4d;">-</span>
+				</div>
+			}
 
 			@if (totalCart > 50)
 			{
+				decimal finalTotal = 0;
+				if (HomeController.MainAccount.fidelity)
+				{
+					finalTotal = totalCart;
+					finalTotal = finalTotal - (finalTotal /100 * 15);
+				}
+				else
+				{
+					finalTotal = totalCart;
+				}
+				<div class="d-flex justify-content-between fw-bold fs-5">
+					<span style="color:#5c4d4d;">Totale da pagare:</span>
+					<span style="color:#5c4d4d;">@totalCart.ToString("0.00")€</span>
+				</div>
+
 				<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
 					<span class="fw-bold" style="color:#5c4d4d;">Costo di spedizione:</span>
 					<span class="text-success fw-bold">Consegna gratuita</span>
@@ -119,14 +131,22 @@
 
 				<div class="d-flex justify-content-between fw-bold fs-5">
 					<span style="color:#5c4d4d;">Totale da pagare:</span>
-					<span style="color:#5c4d4d;">@totalCart.ToString("0.00")€</span>
+					<span style="color:#5c4d4d;">@finalTotal.ToString("0.00")€</span>
 				</div>
 			}
 			else
 			{
 				decimal shippingCost = 4.99m;
-				decimal finalTotal = totalCart + shippingCost;
-
+				decimal finalTotal = 0;
+				if(HomeController.MainAccount.fidelity)
+				{
+					finalTotal = totalCart + shippingCost;
+					finalTotal = finalTotal - (finalTotal /100) * 15;
+				}
+				else
+				{
+					finalTotal = totalCart + shippingCost;
+				}
 				<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
 					<span class="fw-bold" style="color:#5c4d4d;">Totale prodotti:</span>
 					<span style="color:#5c4d4d;">@totalCart.ToString("0.00")€</span>
