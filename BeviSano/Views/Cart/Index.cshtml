@@ -44,7 +44,7 @@
 							decimal totalProduct = 0;
 							totalProduct += (product.Price_Product - (product.Price_Product / 100 * product.Sale_Product)) * product.Quantity_Product;
 							totalCart += product.Price_Product * product.Quantity_Product;
-							<tr class="border align-middle">
+							<tr class="border align-center">
 								<td>
 									<img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:60px; border-radius: 4px;" />
 								</td>
@@ -83,7 +83,7 @@
 
 		@if (Model.Products == null || Model.Products.Count == 0)
 		{
-			<p class="text-center text-danger fw-bold">Il carrello è vuoto!</p>
+			<p class="h4 text-center text-danger fw-normal">Il carrello è vuoto!</p>
 		}
 		else
 		{

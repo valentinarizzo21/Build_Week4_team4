@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\lib\img\silder_1.jpg" />
+    <Content Remove="wwwroot\lib\img\slider_2.jpg" />
+    <Content Remove="wwwroot\lib\img\slider_3.jpg" />
+    <Content Remove="wwwroot\lib\img\slider_4.jpg" />
+    <Content Remove="wwwroot\lib\img\slider_5.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Sql database\" />
   </ItemGroup>
 
