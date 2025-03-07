@@ -1,40 +1,53 @@
-﻿@model RegisterViewModel
+﻿@using BeviSano.Controllers
+@model RegisterViewModel
 @{
     ViewData["Title"] = "Registrati";
     var EmailError = TempData["EmailError"] as string;
     var RegisterError = TempData["RegisterError"] as string;
 }
 
-<div class="d-flex justify-content-center align-items-center mt-5">
-    <div class="p-4 rounded shadow-lg" style="background-color: #f2f1e7; width: 600px;">
-        <h2 class="text-center" style="color: #5c4d4d;">Registrati</h2>
-        <form method="post" asp-controller="Home" asp-action="AddAccount">
-            <div class="mb-3">
-                <label for="firstName" asp-for="Name" class="form-label" style="color: #915b4a;"></label>
-                <input id="firstName" asp-for="Name" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
-                <span class="text-danger" asp-validation-for="Name"></span>
-            </div>
+@if (HomeController.MainAccount == null)
+{
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <div class="p-4 rounded shadow-lg" style="background-color: #f2f1e7; width: 600px;">
+            <h2 class="text-center" style="color: #5c4d4d;">Registrati</h2>
+            <form method="post" asp-controller="Home" asp-action="AddAccount">
+                <div class="mb-3">
+                    <label for="firstName" asp-for="Name" class="form-label" style="color: #915b4a;"></label>
+                    <input id="firstName" asp-for="Name" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
 
-            <div class="mb-3">
-                <label for="email" asp-for="Email" class="form-label" style="color: #915b4a;"></label>
-                <input id="email" asp-for="Email" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
-                <span class="text-danger" asp-validation-for="Email"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="email" asp-for="Email" class="form-label" style="color: #915b4a;"></label>
+                    <input id="email" asp-for="Email" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
 
-            <div class="mb-3">
-                <label for="password" asp-for="Password" class="form-label" style="color: #915b4a;"></label>
-                <input type="password" id="password" asp-for="Password" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
-                <span class="text-danger" asp-validation-for="Password"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="password" asp-for="Password" class="form-label" style="color: #915b4a;"></label>
+                    <input type="password" id="password" asp-for="Password" class="form-control bg_form_complete form-reg border-1" style="border-color: #a96851;" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
 
 
-            <div class="d-flex justify-content-between">
-                <button class="btn text-white w-50 me-2" type="submit" style="background-color: #5c4d4d; border-color: #5c4d4d;">Registrati</button>
-                <a class="btn text-white w-50" href="/#login" style="background-color: #915b4a; border-color: #915b4a;">Accedi</a>
-            </div>
-        </form>
-        <p class="text-danger">@EmailError</p>
-        <p class="text-danger">@RegisterError</p>
+                <div class="d-flex justify-content-between">
+                    <button class="btn text-white w-50 me-2" type="submit" style="background-color: #5c4d4d; border-color: #5c4d4d;">Registrati</button>
+                    <a class="btn text-white w-50" href="/#login" style="background-color: #915b4a; border-color: #915b4a;">Accedi</a>
+                </div>
+            </form>
+            <p class="text-danger">@EmailError</p>
+            <p class="text-danger">@RegisterError</p>
+        </div>
+
     </div>
 
-</div>
+}
+else
+{
+    <div class="container my-5">
+        <h3>Hai già effettuato il login!</h3>
+    </div>
+}
+
+
