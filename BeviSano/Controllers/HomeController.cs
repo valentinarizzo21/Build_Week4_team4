@@ -67,6 +67,14 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Recensione()
+    {
+        return View();
+    }
+
+
+
+
     public async Task<IActionResult> Login(LoginViewModel loginData)
     {
         if (!ModelState.IsValid)

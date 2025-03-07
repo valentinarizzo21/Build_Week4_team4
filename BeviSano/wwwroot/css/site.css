@@ -1,5 +1,7 @@
 /*regole generali*/
 
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Prata&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -8,6 +10,7 @@
 
 body {
     background-color: #F2F1E7;
+    font-family:"Lato",Arial,sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -289,6 +292,7 @@ hr:not([size]) {
     }
 }
 
+
 /*loader fidelity card page*/
 .wine-loader {
     display: flex;
@@ -344,4 +348,77 @@ svg {
 }
 
 }
+
+.carousel-item img {
+    object-fit: cover;
+}
+
+.newsletter-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.newsletter-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-container p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    width: 70%;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    background-color: #915b4a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.newsletter-form button:hover {
+    background-color: #F2F1E7;
+    color: #915b4a;
+    border-color: #915b4a;
+}
+
+.privacy-policy {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.privacy-policy a {
+    color: #915b4a;
+    text-decoration: none;
+}
+
+.privacy-policy a:hover {
+    text-decoration: underline;
+}
+
+
+.dropdown_nav {
+    background-color: #5c4d4d !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: transparent !important;
+    color: white !important; 
+
 }
