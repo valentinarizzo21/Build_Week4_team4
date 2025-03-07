@@ -255,6 +255,7 @@ namespace BeviSano.Controllers
                     await commandDelete.ExecuteNonQueryAsync();
                 }
             }
+            GetCurrentCart();
             return View();
         }
     }

@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+	<link rel="icon" href="~/lib/img/"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -57,8 +58,24 @@
                         else
                         {
                             <i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i>
+                            
                         }
-						<i class="bi bi-person-fill text-white  d-block d-md-none fs-4"></i>
+                        <div class="btn-group d-block d-md-none">
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-person-fill text-white fs-4"></i>
+							</a>
+							<ul class="dropdown-menu dropdown_nav">
+
+								@if (HomeController.MainAccount == null)
+								{
+									<li><a class="dropdown-item hover-opacity" href="/#login">Accedi</a></li>
+								}
+								else
+								{
+									<li><a class="dropdown-item text-white" asp-controller="Home" asp-action="Logout">Logout</a></li>
+								}
+							</ul>
+						</div>
 					</div>
 					<div class="text-md-end me-md-5 d-none d-md-block">
 						<ul class="navbar-nav flex-grow-1 ">
