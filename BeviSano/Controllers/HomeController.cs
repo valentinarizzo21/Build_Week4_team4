@@ -117,6 +117,8 @@ public class HomeController : Controller
         else
         {
             MainAccount = account;
+            var newCart = new CartController();
+            newCart.GetCurrentCart();
             return RedirectToAction("Index", "Product");
         }
     }
@@ -136,7 +138,7 @@ public class HomeController : Controller
             TempData["VoidRegister"] = "Compilare i campi per continuare!";
             return View("Register");
         }
-        if (!regex.IsMatch(addAccount.Email)) 
+        if (!regex.IsMatch(addAccount.Email))
         {
             TempData["EmailError"] = "Inserire un'indirizzo email valido!";
             return View("Register");
@@ -180,12 +182,39 @@ public class HomeController : Controller
             }
         }
         MainAccount = account;
+
+        var newCart = new CartController();
+        newCart.GetCurrentCart();
+
         return RedirectToAction("Index", "Product");
     }
 
     public IActionResult FidelityCard()
     {
         return View();
+    }
+
+    public async Task<IActionResult> ActivateFidelity()
+    {
+        await using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            await connection.OpenAsync();
+            var query = "UPDATE Account SET Fidelity_Card=@bit WHERE Id_Account=@id";
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@bit", "1");
+                command.Parameters.AddWithValue("@id", MainAccount.Id);
+
+                int interestedRows = await command.ExecuteNonQueryAsync();
+                if (interestedRows > 0)
+                {
+                    MainAccount.fidelity = true;
+                }
+            }
+        }
+
+        return RedirectToAction("FidelityCard");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
