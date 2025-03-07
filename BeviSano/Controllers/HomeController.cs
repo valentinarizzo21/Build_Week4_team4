@@ -109,6 +109,8 @@ public class HomeController : Controller
         else
         {
             MainAccount = account;
+            var newCart = new CartController();
+            newCart.GetCurrentCart();
             return RedirectToAction("Index", "Product");
         }
     }
@@ -172,6 +174,10 @@ public class HomeController : Controller
             }
         }
         MainAccount = account;
+
+        var newCart = new CartController();
+        newCart.GetCurrentCart();
+
         return RedirectToAction("Index", "Product");
     }
 

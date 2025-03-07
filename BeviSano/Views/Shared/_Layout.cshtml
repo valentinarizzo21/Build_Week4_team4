@@ -1,17 +1,16 @@
-
 ﻿@using BeviSano.Controllers
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"]</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
 </head>
 <body>
 
@@ -20,7 +19,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand p-0 m-0" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/lib/img/bevi_sano_footer.png" alt="logo_footer" class="img-fluid m-0 p-0 d-block" style="max-width: 110px; max-height: 110px;" /></a>
                 <button class="navbar-toggler border-2" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation" >
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"><i class="bi bi-list pt-1 fs-3 text-white"></i></span>
                 </button>
                 <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
@@ -45,26 +44,35 @@
                     </ul>
                     <div class="d-flex flex-nowrap ms-3 ms-md-0 mb-3">
                         @if (HomeController.MainAccount != null)
-							{
-								<a asp-controller="Cart" asp-action="Index"><i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i></a>
-							}
-							else
-							{
-								<i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i>
-							}
+                        {
+                            <a asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-2 me-1 position-relative">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@CartController.Total</span>
+                                </i>
+                            </a>
+                        }
+                        else
+                        {
+                            <i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i>
+                        }
                         <i class="bi bi-person-fill text-white  d-block d-md-none fs-4"></i>
                     </div>
                     <div class="text-md-end me-md-5 d-none d-md-block">
                         <ul class="navbar-nav flex-grow-1 ">
                             @if (HomeController.MainAccount != null)
-							{
-								<a asp-controller="Cart" asp-action="Index">
-								<li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li></a>
-							}
-							else
-							{
-								<li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li>
-							}
+                            {
+                                <a asp-controller="Cart" asp-action="Index">
+                                <li class="nav-link">
+                                    <span class="text-white text-decoration-none">@CartController.TotalPrice.ToString("0.00") €</span>
+                                    <i class="bi bi-cart-fill text-white fs-4 px-2 position-relative">
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@CartController.Total</span>
+                                    </i>
+                                </li></a>
+                            }
+                            else
+                            {
+                                <li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li>
+                            }
                             <li class="nav-link">
                                 <div class="btn-group">
                                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
