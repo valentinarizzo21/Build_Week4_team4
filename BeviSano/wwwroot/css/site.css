@@ -292,6 +292,7 @@ hr:not([size]) {
     }
 }
 
+
 .carousel-item img {
     object-fit: cover;
 }
@@ -306,15 +307,15 @@ hr:not([size]) {
     margin: 0 auto;
 }
 
-.newsletter-container h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
+    .newsletter-container h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
 
-.newsletter-container p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
+    .newsletter-container p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
 
 .newsletter-form input {
     padding: 10px;
@@ -334,25 +335,25 @@ hr:not([size]) {
     cursor: pointer;
 }
 
-.newsletter-form button:hover {
-    background-color: #F2F1E7;
-    color: #915b4a;
-    border-color: #915b4a;
-}
+    .newsletter-form button:hover {
+        background-color: #F2F1E7;
+        color: #915b4a;
+        border-color: #915b4a;
+    }
 
 .privacy-policy {
     margin-top: 20px;
     font-size: 0.9em;
 }
 
-.privacy-policy a {
-    color: #915b4a;
-    text-decoration: none;
-}
+    .privacy-policy a {
+        color: #915b4a;
+        text-decoration: none;
+    }
 
-.privacy-policy a:hover {
-    text-decoration: underline;
-}
+        .privacy-policy a:hover {
+            text-decoration: underline;
+        }
 
 
 .dropdown_nav {
@@ -362,5 +363,64 @@ hr:not([size]) {
 
 .dropdown-item:hover {
     background-color: transparent !important;
-    color: white !important; 
+    color: white !important;
+}
+
+.dropdown-item{
+    color: white !important;
+}
+/*loader fidelity card page*/
+.wine-loader {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    .wine__icon
+
+{
+    width: 64px;
+    height: auto;
+    position: relative;
+    &::before
+
+{
+    content: "";
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    position: absolute;
+    border: 1px solid #eeeee8;
+    background: #CECEC5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    z-index: 2;
+    box-shadow: 0px 20px 40px rgba(0,0,0,.15);
+}
+
+&::after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    // width: 108px;
+    // height: 108px;
+    background: #EEEEE8;
+    display: block;
+    border: 1px solid rgba(0,0,0,.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    z-index: 2;
+}
+
+svg {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 3;
+}
+
 }

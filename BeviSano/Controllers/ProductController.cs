@@ -93,7 +93,7 @@ namespace BeviSano.Controllers
                             var category = new Category()
                             {
                                 Id_Category = reader.GetInt32(0),
-                                Title = reader.GetString(1)
+                                Title = reader.GetString(1),
                             };
                             Products.Categories.Add(category);
                         }
@@ -103,8 +103,8 @@ namespace BeviSano.Controllers
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                Products.Products = Products.Products
-                    .Where(p => p.Name_Product.ToLower().Contains(searchQuery.ToLower()))
+                Products.Products = Products
+                    .Products.Where(p => p.Name_Product.ToLower().Contains(searchQuery.ToLower()))
                     .ToList();
             }
 
@@ -279,6 +279,10 @@ namespace BeviSano.Controllers
                                 );
                                 await updateCommand.ExecuteNonQueryAsync();
                             }
+
+                            var newCartTwo = new CartController();
+                            newCartTwo.GetCurrentCart();
+
                             return RedirectToAction("Index");
                         }
                         reader.Close();
@@ -296,6 +300,9 @@ namespace BeviSano.Controllers
                     await command.ExecuteNonQueryAsync();
                 }
             }
+
+            var newCart = new CartController();
+            newCart.GetCurrentCart();
             return RedirectToAction("Index");
         }
 
@@ -382,6 +389,9 @@ namespace BeviSano.Controllers
                                 );
                                 await updateCommand.ExecuteNonQueryAsync();
                             }
+
+                            var newCartTwo = new CartController();
+                            newCartTwo.GetCurrentCart();
                             return RedirectToAction("Detail", new { id = id });
                         }
                         reader.Close();
@@ -399,6 +409,9 @@ namespace BeviSano.Controllers
                     await command.ExecuteNonQueryAsync();
                 }
             }
+
+            var newCart = new CartController();
+            newCart.GetCurrentCart();
             return RedirectToAction("Detail", new { id = id });
         }
     }

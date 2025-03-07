@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"]</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+	<link rel="icon" href="~/lib/img/"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
 </head>
 <body>
 
@@ -46,27 +47,52 @@
 
 					</ul>
 					<div class="d-flex flex-nowrap ms-3 ms-md-0 mb-3">
-						@if (HomeController.MainAccount != null)
-						{
-							<a asp-controller="Cart" asp-action="Index"><i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i></a>
-						}
-						else
-						{
-							<i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i>
-						}
-						<i class="bi bi-person-fill text-white  d-block d-md-none fs-4"></i>
+					@if (HomeController.MainAccount != null)
+                        {
+                            <a asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-2 me-1 position-relative">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@CartController.Total</span>
+                                </i>
+                            </a>
+                        }
+                        else
+                        {
+                            <i class="bi bi-cart-fill text-white d-block d-md-none fs-4 pe-3"></i>
+                            
+                        }
+                        <div class="btn-group d-block d-md-none">
+							<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-person-fill text-white fs-4"></i>
+							</a>
+							<ul class="dropdown-menu dropdown_nav">
+
+								@if (HomeController.MainAccount == null)
+								{
+									<li><a class="dropdown-item hover-opacity" href="/#login">Accedi</a></li>
+								}
+								else
+								{
+									<li><a class="dropdown-item text-white" asp-controller="Home" asp-action="Logout">Logout</a></li>
+								}
+							</ul>
+						</div>
 					</div>
 					<div class="text-md-end me-md-5 d-none d-md-block">
 						<ul class="navbar-nav flex-grow-1 ">
-							@if (HomeController.MainAccount != null)
-							{
-								<a asp-controller="Cart" asp-action="Index">
-								<li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li></a>
-							}
-							else
-							{
-								<li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li>
-							}
+						@if (HomeController.MainAccount != null)
+                            {
+                                <a asp-controller="Cart" asp-action="Index">
+                                <li class="nav-link">
+                                    <span class="text-white text-decoration-none">@CartController.TotalPrice.ToString("0.00") €</span>
+                                    <i class="bi bi-cart-fill text-white fs-4 px-2 position-relative">
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@CartController.Total</span>
+                                    </i>
+                                </li></a>
+                            }
+                            else
+                            {
+                                <li class="nav-link"><i class="bi bi-cart-fill text-white fs-4 px-2"></i></li>
+                            }
 							<li class="nav-link">
 								<div class="btn-group">
 									<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -89,10 +115,6 @@
 				</div>
 				</ul>
 			</div>
-
-
-
-
 
 			</div>
 			</div>
@@ -122,8 +144,8 @@
 					</div>
 					<div class="ms-md-4 mt-3 mt-md-0 align-self-center">
 						<h3 class="fw-semibold fs-5">Account</h3>
-						<a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Accedi</a>
-						<a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Registrati</a>
+						<a href="/#login" class="d-block text-decoration-none hover-opacity">Accedi</a>
+						<a asp-controller="Home" asp-action ="Register" class="d-block text-decoration-none hover-opacity">Registrati</a>
 						<a href="javascript:void(0)" class="d-block text-decoration-none hover-opacity">Supporto</a>
 					</div>
 				</div>
