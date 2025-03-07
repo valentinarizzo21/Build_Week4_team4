@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeviSano.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column" style="min-height: 100vh;">
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-toggleable-sm  border-bottom box-shadow  p-0" style="background-color:#915b4a;">
@@ -120,7 +120,7 @@
 			
 		</nav>
 	</header>
-	<div class="container-fluid mx-0 px-0">
+	<div class="container-fluid mx-0 px-0 flex-grow-1">
 		<main role="main" class="m-0 ps-0 pb-3">
 			@RenderBody()
 		</main>
