@@ -40,10 +40,7 @@
 								maxArrivalDate = arrivalDate;
 							}
 
-
-							decimal totalProduct = 0;
-							totalProduct += (product.Price_Product - (product.Price_Product / 100 * product.Sale_Product)) * product.Quantity_Product;
-							totalCart += product.Price_Product * product.Quantity_Product;
+							totalCart += (product.Price_Product - (product.Price_Product / 100 * product.Sale_Product)) * product.Quantity_Product;
 							<tr class="border align-center">
 								<td>
 									<img src="@product.Cover_Product" alt=@product.Name_Product style="max-width:60px; border-radius: 4px;" />
