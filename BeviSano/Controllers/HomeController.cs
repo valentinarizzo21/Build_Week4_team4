@@ -102,6 +102,7 @@ public class HomeController : Controller
                         account.Email = reader.GetString(2);
                         account.Password = reader.GetString(3);
                         account.admin = reader.GetBoolean(4);
+                        account.fidelity = reader.GetBoolean(5);
 
                         accountFound = true;
                     }
