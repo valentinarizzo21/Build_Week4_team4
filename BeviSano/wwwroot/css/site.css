@@ -292,3 +292,75 @@ hr:not([size]) {
     }
 }
 
+.carousel-item img {
+    object-fit: cover;
+}
+
+.newsletter-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.newsletter-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-container p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    width: 70%;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    background-color: #915b4a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.newsletter-form button:hover {
+    background-color: #F2F1E7;
+    color: #915b4a;
+    border-color: #915b4a;
+}
+
+.privacy-policy {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.privacy-policy a {
+    color: #915b4a;
+    text-decoration: none;
+}
+
+.privacy-policy a:hover {
+    text-decoration: underline;
+}
+
+
+.dropdown_nav {
+    background-color: #5c4d4d !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: transparent !important;
+    color: white !important; 
+}

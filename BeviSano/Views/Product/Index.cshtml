@@ -28,6 +28,11 @@
 				}
 			</select>
 		</form>
+		<div>
+			<a class="btn m-3" id="backButton" style="border-color: #915b4a; color: #915b4a;">
+				Torna indietro
+			</a>
+		</div>
 	</div>
 
 	<div class="row g-3 justify-content-start">
@@ -110,4 +115,19 @@
 		  return new bootstrap.Tooltip(tooltipTriggerEl)
 		})
 	</script>
+
+		@* <script>
+			document.addEventListener("DOMContentLoaded", function () {
+				let searchInput = document.getElementById("searchInput");
+				let backButton = document.getElementById("backButton");
+
+				searchInput.addEventListener("input", function () {
+					if (searchInput.value.trim() !== "") {
+						backButton.style.display = "inline-block";
+					} else {
+						backButton.style.display = "none";
+					}
+				});
+			});
+		</script> *@
 }
